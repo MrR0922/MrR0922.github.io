@@ -57,10 +57,11 @@
       font-weight: 700; font-size: 1.2rem; color: var(--text-primary); white-space: nowrap;
       display: flex; align-items: center; gap: 8px;
     }
-    .nav-logo img { height: 28px; width: auto; display: block; }
-    .nav-logo .logo-dark { display: none; }
-    body.dark .nav-logo .logo-light { display: none; }
-    body.dark .nav-logo .logo-dark { display: block; }
+    .nav-logo { color: var(--text-primary); }
+    .nav-logo svg * { fill: var(--text-primary); }
+    .nav-logo svg { color: var(--text-primary); }
+    body.dark .nav-logo svg *, body.dark .nav-logo svg { color: #fff; fill: #fff; }
+    body.dark .nav-logo img { filter: brightness(0) invert(1); }
     .nav-links { display: flex; gap: 28px; }
     .nav-links a {
       font-size: .9rem; font-weight: 500; color: var(--text-secondary);
@@ -159,8 +160,7 @@
   <nav>
     <div class="container">
       <a href="index.html" class="nav-logo">
-        <img src="logo-light.png" alt="Tyler Ren" class="logo-light" />
-        <img src="logo-dark.png" alt="Tyler Ren" class="logo-dark" />
+        <img src="logo.svg" alt="Tyler Ren" style="height:32px;width:auto;" />
       </a>
       <div class="nav-links" id="navLinks">
         <a href="index.html" data-i18n="nav.about">About</a>
