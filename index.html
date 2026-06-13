@@ -269,7 +269,18 @@
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
     .about-text p { margin-bottom: 16px; color: var(--text-secondary); font-size: 1.05rem; }
     .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .stat-card { background: var(--bg-stat); border-radius: 12px; padding: 24px; text-align: center; }
+    .stat-card {
+      background: rgba(255,255,255,.08); border-radius: 12px; padding: 24px; text-align: center;
+      position: relative;
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      border: 1px solid rgba(255,255,255,.2);
+      box-shadow: 0 2px 8px rgba(0,0,0,.04), 0 0 0 1px rgba(255,255,255,.08) inset;
+    }
+    body.dark .stat-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+    }
     .stat-card .num { font-size: 2rem; font-weight: 800; color: var(--accent); }
     .stat-card .label { font-size: .85rem; color: var(--text-soft); margin-top: 4px; }
 
@@ -286,8 +297,14 @@
     .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .skill-tag {
       display: inline-block; font-size: .85rem; padding: 6px 14px; border-radius: 20px;
-      background: var(--bg-tag); border: 1px solid var(--bg-tag-bd); color: var(--text-secondary);
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.15); color: var(--text-secondary);
+      backdrop-filter: blur(8px) saturate(120%);
+      -webkit-backdrop-filter: blur(8px) saturate(120%);
       transition: all .2s;
+    }
+    body.dark .skill-tag {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
     }
     .skill-tag:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
 
@@ -329,7 +346,15 @@
     .education .container { position: relative; z-index: 1; }
     .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .edu-card {
-      background: var(--bg-card); border-radius: 14px; padding: 28px; border: 1px solid var(--bd);
+      background: rgba(255,255,255,.08); border-radius: 14px; padding: 28px;
+      border: 1px solid rgba(255,255,255,.2); position: relative;
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      box-shadow: 0 2px 8px rgba(0,0,0,.04), 0 0 0 1px rgba(255,255,255,.08) inset;
+    }
+    body.dark .edu-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
     }
     .edu-card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 4px; }
     .edu-card .school { color: var(--accent); font-weight: 500; font-size: .95rem; }
@@ -933,7 +958,7 @@ z"/>
           <p data-i18n="more.p4"><strong>💼 Internship:</strong> Available from <strong>June / July 2026</strong>. Open to both on-site and remote positions.</p>
         </div>
         <div class="about-stats reveal" style="grid-template-columns:1fr;">
-          <div style="background:var(--bg-intern);border-radius:12px;padding:24px;text-align:center;border:1px solid var(--bd);">
+          <div style="background:rgba(255,255,255,.08);backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);border-radius:12px;padding:24px;text-align:center;border:1px solid rgba(255,255,255,.2);box-shadow:0 2px 8px rgba(0,0,0,.04),0 0 0 1px rgba(255,255,255,.08) inset;">
             <div style="font-size:1rem;font-weight:600;color:var(--accent);margin-bottom:8px;" data-i18n="more.intern.title">📬 Open for Internship</div>
             <div style="font-size:.9rem;color:var(--text-muted);" data-i18n="more.intern.available">Available June/July 2026</div>
             <div style="font-size:.9rem;color:var(--text-muted);" data-i18n="more.intern.type">On-site · Remote</div>
