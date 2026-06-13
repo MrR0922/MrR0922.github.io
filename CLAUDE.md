@@ -10,7 +10,7 @@ Personal portfolio website for Tyler Ren (任天乐) — an undergraduate resear
 
 Two HTML pages — both are standalone single-page apps with embedded CSS and JS:
 
-- **portfolio.html** — Main portfolio page. Hero section with Vanta.js animated network background + Spline 3D viewer. Sections: About, Skills (tag-based), Projects (data-driven cards with detail modals), Education, Competitions (data-driven with detail modals), Contact.
+- **index.html** — Main portfolio page. Hero section with Vanta.js animated network background + Spline 3D viewer. Sections: About, Skills (tag-based), Projects (data-driven cards with detail modals), Education, Competitions (data-driven with detail modals), Contact.
 - **blogs.html** — Blog listing page. Data-driven blog cards, shared nav styling with portfolio.
 
 Both pages share a consistent design system via CSS custom properties (light/dark themes), the same nav bar HTML structure, and the same i18n + theme toggle pattern.
