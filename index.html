@@ -175,19 +175,67 @@
     .hero-cta { display: flex; gap: 10px; flex-wrap: wrap; }
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 11px 26px; border-radius: 8px; font-weight: 600; font-size: .93rem;
-      transition: all .25s; cursor: pointer; border: none;
+      padding: 12px 28px; border-radius: 14px; font-weight: 600; font-size: .93rem;
+      transition: all .3s ease; cursor: pointer; border: none;
+      position: relative; overflow: hidden;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: 0 2px 8px rgba(0,0,0,.08), 0 0 0 1px rgba(255,255,255,.15) inset;
     }
-    .btn-primary { background: var(--accent); color: var(--text-on-accent); }
-    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
-    .btn-outline { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
-    .btn-outline:hover { background: var(--accent); color: var(--text-on-accent); transform: translateY(-2px); }
-    .hero-socials { display: flex; gap: 14px; margin-top: 24px; }
-    .hero-socials a {
-      width: 40px; height: 40px; border-radius: 50%; background: var(--bg-soft);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--text-secondary); transition: all .25s;
+    .btn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.25) 0%, rgba(255,255,255,.05) 50%, transparent 100%);
+      pointer-events: none; z-index: 0;
     }
+    .btn-primary {
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      color: #1a1a2e;
+      border: 1px solid rgba(255,255,255,.25);
+    }
+    body.dark .btn-primary {
+      background: rgba(255,255,255,.08);
+      color: #e0e8ff;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+    .btn-primary:hover {
+      background: rgba(255,255,255,.18);
+      border-color: rgba(255,255,255,.45);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(67,97,238,.2), 0 0 0 1px rgba(255,255,255,.35) inset;
+    }
+    body.dark .btn-primary:hover {
+      background: rgba(255,255,255,.15);
+      border-color: rgba(255,255,255,.3);
+      box-shadow: 0 8px 32px rgba(90,122,255,.25), 0 0 0 1px rgba(255,255,255,.2) inset;
+    }
+    .btn-outline {
+      background: rgba(255,255,255,.05);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      color: #1a1a2e;
+      border: 1px solid rgba(255,255,255,.25);
+    }
+    body.dark .btn-outline {
+      background: rgba(255,255,255,.06);
+      color: #e0e8ff;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,.35);
+      border-color: rgba(255,255,255,.6);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(67,97,238,.2);
+    }
+    body.dark .btn-outline:hover {
+      background: rgba(255,255,255,.15);
+      border-color: rgba(255,255,255,.3);
+    }
+            .hero-socials { display: flex; gap: 14px; margin-top: 32px; }
+    .hero-socials a { width: 44px; height: 44px; border-radius: 50%; background: var(--bg-soft); display: inline-flex; align-items: center; justify-content: center; color: var(--text-secondary); transition: all .25s; }
+    .hero-socials a svg { width: 22px; height: 22px; }
     .hero-socials a:hover { background: var(--accent); color: var(--text-on-accent); transform: translateY(-3px); }
     .hero-location { font-size: .88rem; color: var(--text-light); margin-top: 16px; }
 
@@ -215,7 +263,7 @@
     /* ====== ABOUT ====== */
     .about { background: var(--bg-card); position: relative; overflow: hidden; }
     #vanta-about { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-    .about .container { position: relative; z-index: 1; }
+    #vanta-more { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
     .about-text p { margin-bottom: 16px; color: var(--text-secondary); font-size: 1.05rem; }
     .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -224,7 +272,13 @@
     .stat-card .label { font-size: .85rem; color: var(--text-soft); margin-top: 4px; }
 
     /* ====== SKILLS ====== */
-    .skills { background: var(--bg-soft); }
+    .skills { background: var(--bg-soft); position: relative; overflow: hidden; }
+    body:not(.dark) .skills { background: #f0f4ff; }
+    body.dark .skills { background: var(--bg-page); }
+    #vanta-skills { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+    #vanta-skills canvas { width: 100% !important; height: 100% !important; }
+    body.dark #vanta-skills canvas { width: 100% !important; height: 100% !important; }
+    .skills .container { position: relative; z-index: 1; }
     .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
     .skill-category h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -236,7 +290,9 @@
     .skill-tag:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
 
     /* ====== PROJECTS ====== */
-    .projects { background: var(--bg-card); }
+    .projects { background: var(--bg-card); position: relative; overflow: hidden; }
+    #vanta-projects { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+    .projects .container { position: relative; z-index: 1; }
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
     .project-card {
       background: var(--bg-page); border-radius: 14px; padding: 28px;
@@ -257,7 +313,9 @@
     .project-card .click-hint { font-size: .8rem; color: var(--text-hint); margin-top: 8px; display: flex; align-items: center; gap: 4px; }
 
     /* ====== EDUCATION ====== */
-    .education { background: var(--bg-soft); }
+    .education { background: var(--bg-soft); position: relative; overflow: hidden; }
+    #vanta-edu { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+    .education .container { position: relative; z-index: 1; }
     .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .edu-card {
       background: var(--bg-card); border-radius: 14px; padding: 28px; border: 1px solid var(--bd);
@@ -272,7 +330,9 @@
     }
 
     /* ====== COMPETITIONS ====== */
-    .competitions { background: var(--bg-card); }
+    .competitions { background: var(--bg-card); position: relative; overflow: hidden; }
+    #vanta-comp { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+    .competitions .container { position: relative; z-index: 1; }
     .comp-grid { display: grid; gap: 20px; }
     .comp-item {
       background: var(--bg-page); border-radius: 12px; padding: 24px;
@@ -291,7 +351,8 @@
     .comp-item .click-hint { font-size: .78rem; color: var(--text-hint); margin-top: 6px; }
 
     /* ====== CONTACT ====== */
-    .contact { background: var(--bg-soft); text-align: center; }
+    .contact { background: var(--bg-soft); text-align: center; position: relative; overflow: hidden; }
+    #vanta-contact { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
     .contact-card {
       max-width: 520px; margin: 0 auto;
       background: var(--bg-card); border-radius: 16px; padding: 48px 36px; border: 1px solid var(--bd);
@@ -499,6 +560,7 @@
 
   <!-- ====== SKILLS ====== -->
   <section id="skills" class="skills">
+    <div id="vanta-skills"></div>
     <div class="container">
       <span class="section-label" data-i18n="skills.label">Skills</span>
       <h2 class="section-title" data-i18n="skills.title">Technical Toolkit</h2>
@@ -526,6 +588,7 @@
 
   <!-- ====== PROJECTS ====== -->
   <section id="projects" class="projects">
+    <div id="vanta-projects"></div>
     <div class="container">
       <span class="section-label" data-i18n="projects.label">Projects</span>
       <h2 class="section-title" data-i18n="projects.title">Research &amp; Engineering</h2>
@@ -536,6 +599,7 @@
 
   <!-- ====== EDUCATION ====== -->
   <section id="education" class="education">
+    <div id="vanta-edu"></div>
     <div class="container">
       <span class="section-label" data-i18n="edu.label">Education</span>
       <h2 class="section-title" data-i18n="edu.title">Academic Background</h2>
@@ -562,6 +626,7 @@
 
   <!-- ====== COMPETITIONS ====== -->
   <section id="competitions" class="competitions">
+    <div id="vanta-comp"></div>
     <div class="container">
       <span class="section-label" data-i18n="comp.label">Honors</span>
       <h2 class="section-title" data-i18n="comp.title">Competitions &amp; Awards</h2>
@@ -571,7 +636,15 @@
   </section>
 
   <!-- ====== MORE ====== -->
-  <section id="more" class="about" style="background:var(--bg-page);">
+  <section id="more" class="about" style="background:var(--bg-page);position:relative;overflow:hidden;">
+    <style>
+      #more .about-text p, #more .about-text strong, #more .about-stats .label, #more .about-stats .num { color: #fff; }
+      #more .section-label, #more .section-title, #more .section-desc { color: #fff; }
+      #more .btn-primary { color: #1a1a2e; }
+      body.dark #more .about-text p, body.dark #more .about-text strong, body.dark #more .about-stats .label, body.dark #more .about-stats .num { color: #e0e8ff; }
+      body.dark #more .section-label, body.dark #more .section-title { color: #e0e8ff; }
+    </style>
+    <div id="vanta-more"></div>
     <div class="container">
       <span class="section-label" data-i18n="more.label">Beyond the Lab</span>
       <h2 class="section-title" data-i18n="more.title">More About Me</h2>
@@ -595,6 +668,7 @@
 
   <!-- ====== CONTACT ====== -->
   <section id="contact" class="contact">
+    <div id="vanta-contact"></div>
     <div class="container">
       <span class="section-label" data-i18n="contact.label">Contact</span>
       <h2 class="section-title" data-i18n="contact.title">Get In Touch</h2>
@@ -616,12 +690,18 @@
     <div class="container">
       <p data-i18n="footer.copyright">&copy; 2026 Tyler Ren (任天乐). Built with ❤️.</p>
     </div>
-  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 
   <!-- Vanta.js animated background + Spline 3D robot -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.dots.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.rings.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.trunk.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cells.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.clouds.min.js"></script>
   <script type="module" src="https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js"></script>
 
   <!-- ====== TOAST ====== -->
@@ -905,7 +985,13 @@
     function initVanta() {
       if (window.vantaEffect) window.vantaEffect.destroy();
       if (window.vantaGlobe) window.vantaGlobe.destroy();
-      const color = currentTheme === 'dark' ? 0x2a2a50 : 0x4361ee;
+      if (window.vantaHalo) window.vantaHalo.destroy();
+      if (window.vantaDots) window.vantaDots.destroy();
+      if (window.vantaRings) window.vantaRings.destroy();
+      if (window.vantaComp) window.vantaComp.destroy();
+      if (window.vantaCells) window.vantaCells.destroy();
+      if (window.vantaClouds) window.vantaClouds.destroy();
+      const color = currentTheme === 'dark' ? 0x2a2a50 : 0x5a7aff;
       const bgColor = currentTheme === 'dark' ? 0x0d0d1a : 0xf0f4ff;
       window.vantaEffect = VANTA.NET({
         el: "#vanta-bg",
@@ -918,6 +1004,51 @@
         mouseControls: true, touchControls: true, gyroControls: false,
         minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00,
         color: color, backgroundColor: bgColor
+      });
+      window.vantaDots = VANTA.DOTS({
+        el: "#vanta-skills",
+        mouseControls: true, touchControls: true, gyroControls: false,
+        minHeight: 600.00, minWidth: 2000.00, scale: 1.00, scaleMobile: 1.00,
+        color: color,
+        color2: color,
+        backgroundColor: bgColor
+      });
+      window.vantaRings = VANTA.RINGS({
+        el: "#vanta-projects",
+        mouseControls: true, touchControls: true, gyroControls: false,
+        minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00,
+        backgroundColor: bgColor,
+        color: color
+      });
+      window.vantaWaves = VANTA.WAVES({
+        el: "#vanta-edu",
+        mouseControls: true, touchControls: true, gyroControls: false,
+        minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00,
+        color: bgColor
+      });
+      window.vantaComp = VANTA.TRUNK({
+        el: "#vanta-comp",
+        mouseControls: true, touchControls: true, gyroControls: false,
+        minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00,
+        color: color,
+        backgroundColor: bgColor
+      });
+      window.vantaCells = VANTA.CELLS({
+        el: "#vanta-more",
+        mouseControls: true, touchControls: true, gyroControls: false,
+        minHeight: 200.00, minWidth: 200.00, scale: 1.00,
+        color1: bgColor,
+        color2: color,
+        size: 2.60,
+        speed: 1.80
+      });
+      window.vantaClouds = VANTA.CLOUDS({
+        el: "#vanta-contact",
+        mouseControls: true, touchControls: true, gyroControls: false,
+        minHeight: 200.00, minWidth: 200.00,
+        backgroundColor: bgColor,
+        skyColor: bgColor,
+        cloudColor: color
       });
     }
 
