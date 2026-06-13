@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tyler Ren — Portfolio</title>
+
+  <style>
+    /* ====== CSS VARIABLES (Light) ====== */
+    :root {
+      --bg-page: #fafafa;
+      --bg-card: #ffffff;
+      --bg-soft: #f5f7fa;
+      --bg-nav: rgba(255,255,255,.88);
+      --bg-avatar: #eef0f4;
+      --bg-stat: #f5f7fa;
+      --bg-tag: #fff;
+      --bg-tag-bd: #e0e4ec;
+      --bg-badge: #e8edff;
+      --bg-hero: linear-gradient(135deg, #f0f4ff 0%, #e8ecf4 100%);
+      --bg-intern: #f0f4ff;
+      --overlay: rgba(0,0,0,.45);
+
+      --text-primary: #1a1a2e;
+      --text-secondary: #555;
+      --text-muted: #666;
+      --text-soft: #777;
+      --text-light: #999;
+      --text-lighter: #aaa;
+      --text-name: #888;
+      --text-hint: #bbb;
+      --text-on-accent: #fff;
+
+      --accent: #4361ee;
+      --accent-hover: #3a0ca3;
+      --accent-glow: rgba(67,97,238,.25);
+
+      --bd: #eef0f4;
+      --bd-strong: #dde0e8;
+      --bd-tag: #e0e4ec;
+
+      --shadow-card: 0 12px 32px rgba(0,0,0,.06);
+      --shadow-btn: 0 6px 20px rgba(67,97,238,.25);
+      --shadow-modal: 0 24px 64px rgba(0,0,0,.15);
+
+      --nav-blur: blur(12px);
+      --scroll-thumb: #d0d4dc;
+    }
+
+    /* ====== DARK MODE ====== */
+    body.dark {
+      --bg-page: #0d0d1a;
+      --bg-card: #16162a;
+      --bg-soft: #12122a;
+      --bg-nav: rgba(13,13,26,.92);
+      --bg-avatar: #2a2a44;
+      --bg-stat: #1a1a30;
+      --bg-tag: #1e1e38;
+      --bg-tag-bd: #333358;
+      --bg-badge: #1e1e48;
+      --bg-hero: linear-gradient(135deg, #0d0d1a 0%, #12122a 100%);
+      --bg-intern: #12122a;
+      --overlay: rgba(0,0,0,.7);
+
+      --text-primary: #e8e8f0;
+      --text-secondary: #a0a0b8;
+      --text-muted: #8888a0;
+      --text-soft: #8888a0;
+      --text-light: #666680;
+      --text-lighter: #555570;
+      --text-name: #8888a0;
+      --text-hint: #555570;
+      --text-on-accent: #fff;
+
+      --accent: #5a7aff;
+      --accent-hover: #7b9aff;
+      --accent-glow: rgba(90,122,255,.3);
+
+      --bd: #2a2a44;
+      --bd-strong: #3a3a58;
+      --bd-tag: #3a3a58;
+
+      --shadow-card: 0 12px 32px rgba(0,0,0,.25);
+      --shadow-btn: 0 6px 20px rgba(90,122,255,.3);
+      --shadow-modal: 0 24px 64px rgba(0,0,0,.5);
+
+      --nav-blur: blur(16px);
+      --scroll-thumb: #3a3a58;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      background: var(--bg-page); color: var(--text-primary);
+      line-height: 1.7; transition: background .35s, color .35s;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--accent-hover); }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* ====== NAV ====== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--bg-nav);
+      backdrop-filter: var(--nav-blur);
+      border-bottom: 1px solid var(--bd);
+    }
+    nav .container {
+      display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 12px;
+    }
+    .nav-logo {
+      font-weight: 700; font-size: 1.2rem; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo img { height: 28px; width: auto; display: block; }
+    .nav-logo .logo-dark { display: none; }
+    body.dark .nav-logo .logo-light { display: none; }
+    body.dark .nav-logo .logo-dark { display: block; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      font-size: .9rem; font-weight: 500; color: var(--text-secondary);
+      position: relative; padding-bottom: 2px; white-space: nowrap;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 2px;
+      background: var(--accent); transition: width .3s;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover { color: var(--text-primary); }
+
+    .nav-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+    .nav-blog-btn { font-size: .9rem; font-weight: 500; color: var(--text-secondary);
+      padding: 0 10px; transition: color .2s; white-space: nowrap; }
+    .nav-blog-btn:hover { color: var(--text-primary); }
+    .mobile-blog-link { display: none; }
+    .icon-btn {
+      width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--bd);
+      background: transparent; color: var(--text-secondary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; transition: all .25s; flex-shrink: 0;
+    }
+    .icon-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--bg-soft); }
+    .icon-btn.lang-btn { font-size: .8rem; font-weight: 700; width: 38px; letter-spacing: .02em; }
+
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text-primary); transition: .3s; border-radius: 1px; }
+
+    /* ====== HERO (split layout with Vanta background) ====== */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 80px 0; position: relative; overflow: hidden;
+    }
+    #vanta-bg {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
+    }
+    .hero .container {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+      align-items: center; width: 100%; position: relative; z-index: 1;
+    }
+    .hero-left { text-align: left; }
+    .hero-avatar {
+      width: 100px; height: 100px; border-radius: 50%; object-fit: cover;
+      margin-bottom: 20px; border: 4px solid var(--bg-card);
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    }
+    .hero h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -.03em; margin-bottom: 2px; }
+    .hero .name-zh { font-size: 1.2rem; color: var(--text-name); font-weight: 400; margin-bottom: 8px; }
+    .hero .subtitle { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 12px; }
+    .hero .tagline { font-size: 1rem; color: var(--text-soft); max-width: 480px; margin-bottom: 28px; line-height: 1.7; }
+    .hero-cta { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 26px; border-radius: 8px; font-weight: 600; font-size: .93rem;
+      transition: all .25s; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--accent); color: var(--text-on-accent); }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+    .btn-outline { background: transparent; color: var(--accent); border: 2px solid var(--accent); }
+    .btn-outline:hover { background: var(--accent); color: var(--text-on-accent); transform: translateY(-2px); }
+    .hero-socials { display: flex; gap: 14px; margin-top: 24px; }
+    .hero-socials a {
+      width: 40px; height: 40px; border-radius: 50%; background: var(--bg-soft);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary); transition: all .25s;
+    }
+    .hero-socials a:hover { background: var(--accent); color: var(--text-on-accent); transform: translateY(-3px); }
+    .hero-location { font-size: .88rem; color: var(--text-light); margin-top: 16px; }
+
+    /* Spline container */
+    .hero-right {
+      display: flex; align-items: center; justify-content: center;
+      position: relative; min-height: 420px;
+    }
+    .spline-wrapper {
+      width: 100%; height: 520px; position: relative;
+    }
+    .spline-wrapper spline-viewer {
+      width: 100%; height: 100%; display: block;
+    }
+
+    /* ====== SECTION SHARED ====== */
+    section { padding: 100px 0; }
+    .section-label {
+      display: inline-block; font-size: .8rem; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+    }
+    .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 12px; }
+    .section-desc { color: var(--text-soft); max-width: 600px; margin-bottom: 48px; }
+
+    /* ====== ABOUT ====== */
+    .about { background: var(--bg-card); position: relative; overflow: hidden; }
+    #vanta-about { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+    .about .container { position: relative; z-index: 1; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .about-text p { margin-bottom: 16px; color: var(--text-secondary); font-size: 1.05rem; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .stat-card { background: var(--bg-stat); border-radius: 12px; padding: 24px; text-align: center; }
+    .stat-card .num { font-size: 2rem; font-weight: 800; color: var(--accent); }
+    .stat-card .label { font-size: .85rem; color: var(--text-soft); margin-top: 4px; }
+
+    /* ====== SKILLS ====== */
+    .skills { background: var(--bg-soft); }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .skill-category h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tag {
+      display: inline-block; font-size: .85rem; padding: 6px 14px; border-radius: 20px;
+      background: var(--bg-tag); border: 1px solid var(--bg-tag-bd); color: var(--text-secondary);
+      transition: all .2s;
+    }
+    .skill-tag:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+    /* ====== PROJECTS ====== */
+    .projects { background: var(--bg-card); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+    .project-card {
+      background: var(--bg-page); border-radius: 14px; padding: 28px;
+      border: 1px solid var(--bd); transition: all .3s; cursor: pointer;
+    }
+    .project-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card); border-color: var(--accent); }
+    .project-card .emoji { font-size: 1.8rem; margin-bottom: 12px; }
+    .project-card .date { font-size: .82rem; color: var(--text-light); font-weight: 500; margin-bottom: 4px; }
+    .project-card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; }
+    .project-card p { font-size: .92rem; color: var(--text-muted); margin-bottom: 12px; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    .project-tags span {
+      font-size: .78rem; padding: 3px 10px; border-radius: 20px;
+      background: var(--bg-soft); color: var(--text-secondary);
+    }
+    .project-highlights { padding-left: 18px; margin-bottom: 12px; }
+    .project-highlights li { font-size: .88rem; color: var(--text-muted); margin-bottom: 6px; list-style: disc; }
+    .project-card .click-hint { font-size: .8rem; color: var(--text-hint); margin-top: 8px; display: flex; align-items: center; gap: 4px; }
+
+    /* ====== EDUCATION ====== */
+    .education { background: var(--bg-soft); }
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .edu-card {
+      background: var(--bg-card); border-radius: 14px; padding: 28px; border: 1px solid var(--bd);
+    }
+    .edu-card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 4px; }
+    .edu-card .school { color: var(--accent); font-weight: 500; font-size: .95rem; }
+    .edu-card .meta { font-size: .85rem; color: var(--text-light); margin-bottom: 8px; }
+    .edu-card p { font-size: .92rem; color: var(--text-muted); }
+    .edu-card .badge {
+      display: inline-block; font-size: .78rem; padding: 2px 10px; border-radius: 12px;
+      background: var(--bg-badge); color: var(--accent); font-weight: 500; margin-top: 8px;
+    }
+
+    /* ====== COMPETITIONS ====== */
+    .competitions { background: var(--bg-card); }
+    .comp-grid { display: grid; gap: 20px; }
+    .comp-item {
+      background: var(--bg-page); border-radius: 12px; padding: 24px;
+      border: 1px solid var(--bd); display: flex; gap: 16px; align-items: flex-start; cursor: pointer;
+      transition: all .25s;
+    }
+    .comp-item:hover { border-color: var(--accent); transform: translateX(4px); }
+    .comp-item .badge {
+      flex-shrink: 0; font-size: .75rem; font-weight: 700; padding: 4px 12px;
+      border-radius: 20px; background: var(--accent); color: var(--text-on-accent);
+    }
+    .comp-item .badge.silver { background: #6c757d; }
+    .comp-item .badge.bronze { background: #cd7f32; }
+    .comp-item h4 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+    .comp-item p { font-size: .9rem; color: var(--text-muted); }
+    .comp-item .click-hint { font-size: .78rem; color: var(--text-hint); margin-top: 6px; }
+
+    /* ====== CONTACT ====== */
+    .contact { background: var(--bg-soft); text-align: center; }
+    .contact-card {
+      max-width: 520px; margin: 0 auto;
+      background: var(--bg-card); border-radius: 16px; padding: 48px 36px; border: 1px solid var(--bd);
+    }
+    .contact-card h3 { font-size: 1.5rem; margin-bottom: 8px; }
+    .contact-card p { color: var(--text-muted); margin-bottom: 24px; }
+    .contact-email { font-size: 1.2rem; font-weight: 600; color: var(--accent); word-break: break-all; }
+    .contact-extra { font-size: .9rem; color: var(--text-light); margin-top: 16px; }
+
+    /* ====== FOOTER ====== */
+    footer {
+      text-align: center; padding: 32px 24px; border-top: 1px solid var(--bd);
+      font-size: .85rem; color: var(--text-light);
+    }
+
+    /* ====== MODAL ====== */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 200;
+      background: var(--overlay); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .3s; padding: 24px;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: auto; }
+    .modal {
+      background: var(--bg-card); border-radius: 18px; max-width: 700px; width: 100%;
+      max-height: 85vh; overflow-y: auto; padding: 40px 36px;
+      position: relative; box-shadow: var(--shadow-modal);
+      transform: translateY(30px) scale(.96); transition: transform .3s ease;
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+    .modal-close {
+      position: absolute; top: 16px; right: 20px;
+      background: none; border: none; font-size: 1.6rem; cursor: pointer;
+      color: var(--text-light); transition: color .2s; line-height: 1; padding: 4px;
+    }
+    .modal-close:hover { color: var(--text-primary); }
+    .modal .modal-emoji { font-size: 2.4rem; margin-bottom: 12px; }
+    .modal .modal-date { font-size: .85rem; color: var(--text-light); font-weight: 500; margin-bottom: 4px; }
+    .modal h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 16px; }
+    .modal .modal-subtitle { color: var(--accent); font-weight: 500; font-size: 1rem; margin-bottom: 16px; }
+    .modal p { font-size: .98rem; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.8; }
+    .modal .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .modal .modal-tags span {
+      font-size: .8rem; padding: 4px 12px; border-radius: 20px;
+      background: var(--bg-soft); color: var(--text-secondary);
+    }
+    .modal h3 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 12px; }
+    .modal ul { padding-left: 20px; margin-bottom: 16px; }
+    .modal ul li { list-style: disc; font-size: .95rem; color: var(--text-secondary); margin-bottom: 8px; line-height: 1.7; }
+    .modal .modal-img {
+      width: 100%; border-radius: 12px; margin: 16px 0;
+      border: 1px solid var(--bd); box-shadow: var(--shadow-card);
+    }
+    .modal .modal-img-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0;
+    }
+    .modal .modal-img-row img {
+      width: 100%; border-radius: 10px; border: 1px solid var(--bd);
+      box-shadow: var(--shadow-card);
+    }
+    .modal::-webkit-scrollbar { width: 6px; }
+    .modal::-webkit-scrollbar-track { background: transparent; }
+    .modal::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 3px; }
+
+    /* ====== TOAST ====== */
+    .toast {
+      position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px);
+      z-index: 999; background: var(--bg-card); color: var(--text-primary);
+      padding: 14px 28px; border-radius: 12px; border: 1px solid var(--bd);
+      box-shadow: 0 8px 30px rgba(0,0,0,.12); font-size: .95rem; font-weight: 500;
+      opacity: 0; pointer-events: none; transition: all .4s ease;
+      display: flex; align-items: center; gap: 10px; white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+    .toast-icon { font-size: 1.2rem; }
+    .toast-email { color: var(--accent); font-weight: 600; }
+
+    /* ====== SCROLL REVEAL ====== */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 1024px) {
+      .spline-wrapper { height: 400px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; position: absolute; top: 64px; left: 0; right: 0;
+        background: var(--bg-nav); flex-direction: column; gap: 0;
+        border-bottom: 1px solid var(--bd); padding: 8px 24px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 14px 0; border-bottom: 1px solid var(--bd); }
+      .nav-links a.mobile-blog-link { display: block; }
+      .nav-toggle { display: flex; }
+
+      .hero { min-height: auto; padding: 100px 0 60px; }
+      .hero .container { grid-template-columns: 1fr; gap: 24px; }
+      .hero-left { text-align: center; }
+      .hero .tagline { max-width: 100%; margin-left: auto; margin-right: auto; }
+      .hero-cta, .hero-socials { justify-content: center; }
+      .hero h1 { font-size: 2.2rem; }
+      .spline-wrapper { height: 320px; }
+      .hero-right { min-height: 320px; }
+
+      .about-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .comp-item { flex-direction: column; }
+      .modal { padding: 28px 20px; }
+      section { padding: 72px 0; }
+      .nav-actions { gap: 4px; }
+      .icon-btn { width: 32px; height: 32px; font-size: 1rem; }
+      .icon-btn.lang-btn { width: 34px; font-size: .75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== NAV ====== -->
+  <nav>
+    <div class="container">
+      <a href="#" class="nav-logo">
+        <img src="logo-light.png" alt="Tyler Ren" class="logo-light" />
+        <img src="logo-dark.png" alt="Tyler Ren" class="logo-dark" />
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#skills" data-i18n="nav.skills">Skills</a>
+        <a href="#projects" data-i18n="nav.projects">Projects</a>
+        <a href="#education" data-i18n="nav.education">Education</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+        <a href="blogs.html" class="mobile-blog-link" data-i18n="nav.blogs">Blogs</a>
+      </div>
+      <div class="nav-actions">
+        <a href="blogs.html" class="nav-blog-btn" data-i18n="nav.blogs">Blogs</a>
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
+        <button class="icon-btn lang-btn" id="langToggle">中</button>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ====== MODAL ====== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modalContent">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero" id="hero">
+    <div id="vanta-bg"></div>
+    <div class="container">
+      <div class="hero-left">
+        <img src="profile.jpg" alt="Avatar" class="hero-avatar" id="heroAvatar"/>
+        <h1>Tyler Ren</h1>
+        <p class="name-zh">任天乐</p>
+        <p class="subtitle" data-i18n="hero.subtitle">Robot Learning &amp; Embodied AI</p>
+        <p class="tagline" data-i18n="hero.tagline">Building intelligent robotic systems that perceive, reason, and act — from simulation to the real world. Passionate about VLA, imitation learning, and bridging the sim-to-real gap.</p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary" data-i18n="hero.btn.projects">View Projects</a>
+          <a href="#contact" class="btn btn-outline" data-i18n="hero.btn.contact">Get In Touch</a>
+        </div>
+        <div class="hero-socials">
+          <a href="https://github.com/MrR0922" target="_blank" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></a>
+          <a href="javascript:void(0)" onclick="copyEmail()" aria-label="Email" title="Click to copy email"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+        </div>
+        <p class="hero-location" data-i18n="hero.location">📍 Shenzhen, Guangdong, China</p>
+      </div>
+      <div class="hero-right">
+        <div class="spline-wrapper">
+          <spline-viewer url="https://prod.spline.design/1UGfjHBT4WgXQn4W/scene.splinecode"></spline-viewer>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== ABOUT ====== -->
+  <section id="about" class="about">
+    <div id="vanta-about"></div>
+    <div class="container">
+      <span class="section-label" data-i18n="about.label">About</span>
+      <h2 class="section-title" data-i18n="about.title">Who I Am</h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p data-i18n="about.p1">I'm an undergraduate researcher in Electronic Information Engineering at <strong>Shenzhen University</strong>, with a conditional offer for graduate studies at <strong>National University of Singapore (NUS)</strong>. My work focuses on <strong>embodied AI, robot learning, and vision-language-action (VLA) models</strong> — building systems that let robots understand natural language, perceive their environment, and execute dexterous manipulation.</p>
+          <p data-i18n="about.p2">I have hands-on experience with the full robotics stack: from simulation in Isaac Lab and real-world teleoperation to imitation learning with ACT/Diffusion Policy and RL with PPO. I enjoy tackling the sim-to-real transfer problem and making robots robust in unstructured environments.</p>
+          <p data-i18n="about.p3">Available for internship starting <strong>June / July 2026</strong> — on-site or remote. Let's build the future of intelligent robotics together.</p>
+          <a href="#contact" class="btn btn-primary" style="margin-top:12px;" data-i18n="about.btn">Let's Talk</a>
+        </div>
+        <div class="about-stats reveal">
+          <div class="stat-card"><div class="num">3</div><div class="label" data-i18n="stat.projects">Robot Learning Projects</div></div>
+          <div class="stat-card"><div class="num">1</div><div class="label" data-i18n="stat.province">Provincial Innovation Lead</div></div>
+          <div class="stat-card"><div class="num">3</div><div class="label" data-i18n="stat.awards">National Awards Won</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SKILLS ====== -->
+  <section id="skills" class="skills">
+    <div class="container">
+      <span class="section-label" data-i18n="skills.label">Skills</span>
+      <h2 class="section-title" data-i18n="skills.title">Technical Toolkit</h2>
+      <p class="section-desc" data-i18n="skills.desc">Technologies and frameworks I use to bring robotic intelligence from simulation to the real world.</p>
+      <div class="skills-grid">
+        <div class="skill-category reveal">
+          <h3 data-i18n="skills.cat1">🤖 Robot Learning &amp; AI</h3>
+          <div class="skill-tags"><span class="skill-tag">PPO</span><span class="skill-tag">ACT / Diffusion Policy</span><span class="skill-tag">Imitation Learning</span><span class="skill-tag">Reinforcement Learning</span><span class="skill-tag">Inverse Kinematics</span><span class="skill-tag">Isaac Lab / Isaac Sim</span><span class="skill-tag">MoveIt</span><span class="skill-tag">ROS / ROS2</span><span class="skill-tag">LeRobot</span></div>
+        </div>
+        <div class="skill-category reveal">
+          <h3 data-i18n="skills.cat2">🧠 Deep Learning</h3>
+          <div class="skill-tags"><span class="skill-tag">PyTorch</span><span class="skill-tag">Transformer</span><span class="skill-tag">LSTM</span><span class="skill-tag">CVAE</span></div>
+        </div>
+        <div class="skill-category reveal">
+          <h3 data-i18n="skills.cat3">⚡ Embedded &amp; Hardware</h3>
+          <div class="skill-tags"><span class="skill-tag">STM32</span><span class="skill-tag">Raspberry Pi</span><span class="skill-tag">Orange Pi</span><span class="skill-tag">NVIDIA Jetson</span><span class="skill-tag">Camera Pipeline</span><span class="skill-tag">Real-time Inference</span><span class="skill-tag">PCB Design</span></div>
+        </div>
+        <div class="skill-category reveal">
+          <h3 data-i18n="skills.cat4">💻 Programming &amp; Languages</h3>
+          <div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">C / C++</span><span class="skill-tag">Bash</span><span class="skill-tag">中文</span><span class="skill-tag">English (IELTS 6.0)</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PROJECTS ====== -->
+  <section id="projects" class="projects">
+    <div class="container">
+      <span class="section-label" data-i18n="projects.label">Projects</span>
+      <h2 class="section-title" data-i18n="projects.title">Research &amp; Engineering</h2>
+      <p class="section-desc" data-i18n="projects.desc">A selection of my work in embodied AI, robotic manipulation, and vision-language-action systems. Click any card for full details.</p>
+      <div class="projects-grid" id="projectGrid"></div>
+    </div>
+  </section>
+
+  <!-- ====== EDUCATION ====== -->
+  <section id="education" class="education">
+    <div class="container">
+      <span class="section-label" data-i18n="edu.label">Education</span>
+      <h2 class="section-title" data-i18n="edu.title">Academic Background</h2>
+      <p class="section-desc" data-i18n="edu.desc">My journey in electronic engineering and intelligent systems.</p>
+      <div class="edu-grid">
+        <div class="edu-card reveal">
+          <h3 data-i18n="edu.szu.title">B.E. in Electronic Information Engineering</h3>
+          <p class="school">Shenzhen University</p>
+          <p class="meta" data-i18n="edu.szu.meta">Sep 2023 — Jun 2027 (Expected) · Shenzhen</p>
+          <p><strong data-i18n="edu.szu.gpaLabel">GPA:</strong> 3.79 / 4.5 (85.2 / 100)</p>
+          <p><strong data-i18n="edu.szu.coursesLabel">Relevant Coursework:</strong> <span data-i18n="edu.szu.courses">Machine Learning, Optimization, Digital Signal Processing, Circuit Analysis, C++ Programming</span></p>
+          <div class="badge" data-i18n="edu.szu.badge">Class Monitor (班长)</div>
+        </div>
+        <div class="edu-card reveal">
+          <h3 data-i18n="edu.nus.title">Graduate Studies (Conditional Offer)</h3>
+          <p class="school">National University of Singapore (NUS)</p>
+          <p class="meta" data-i18n="edu.nus.meta">Aug 2027 (Anticipated) · Singapore</p>
+          <p data-i18n="edu.nus.desc">Conditional offer for graduate studies in a related field. Building on my foundation in machine learning, robotics, and intelligent systems.</p>
+          <div class="badge">🇸🇬 NUS</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== COMPETITIONS ====== -->
+  <section id="competitions" class="competitions">
+    <div class="container">
+      <span class="section-label" data-i18n="comp.label">Honors</span>
+      <h2 class="section-title" data-i18n="comp.title">Competitions &amp; Awards</h2>
+      <p class="section-desc" data-i18n="comp.desc">Recognition from national-level competitions in AI, embedded systems, and hardware design. Click for details.</p>
+      <div class="comp-grid" id="compGrid"></div>
+    </div>
+  </section>
+
+  <!-- ====== MORE ====== -->
+  <section id="more" class="about" style="background:var(--bg-page);">
+    <div class="container">
+      <span class="section-label" data-i18n="more.label">Beyond the Lab</span>
+      <h2 class="section-title" data-i18n="more.title">More About Me</h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p data-i18n="more.p1"><strong>🎓 Class Leader:</strong> Serving as class monitor (班长), coordinating class activities, organizing evaluation materials, and liaising with university-level review committees.</p>
+          <p data-i18n="more.p2"><strong>🏀 Sports:</strong> Member of the university basketball team, competing in the "President's Cup" (校长杯).</p>
+          <p data-i18n="more.p3"><strong>🎹 Interests:</strong> Embodied AI, AI chips &amp; hardware, robotics, PCB design, basketball, and piano.</p>
+          <p data-i18n="more.p4"><strong>💼 Internship:</strong> Available from <strong>June / July 2026</strong>. Open to both on-site and remote positions.</p>
+        </div>
+        <div class="about-stats reveal" style="grid-template-columns:1fr;">
+          <div style="background:var(--bg-intern);border-radius:12px;padding:24px;text-align:center;border:1px solid var(--bd);">
+            <div style="font-size:1rem;font-weight:600;color:var(--accent);margin-bottom:8px;" data-i18n="more.intern.title">📬 Open for Internship</div>
+            <div style="font-size:.9rem;color:var(--text-muted);" data-i18n="more.intern.available">Available June/July 2026</div>
+            <div style="font-size:.9rem;color:var(--text-muted);" data-i18n="more.intern.type">On-site · Remote</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CONTACT ====== -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <span class="section-label" data-i18n="contact.label">Contact</span>
+      <h2 class="section-title" data-i18n="contact.title">Get In Touch</h2>
+      <p class="section-desc" style="margin-left:auto;margin-right:auto;" data-i18n="contact.desc">I'm always open to research collaborations, internship opportunities, and conversations about embodied AI.</p>
+      <div class="contact-card reveal">
+        <h3 data-i18n="contact.card.title">Say Hello 👋</h3>
+        <p data-i18n="contact.card.desc">Whether you have a project idea, an internship opportunity, or just want to connect about robotics — I'd love to hear from you.</p>
+        <a href="mailto:tianle66666@gmail.com" class="contact-email">tianle66666@gmail.com</a>
+        <div class="contact-extra">
+          <p>🐙 <a href="https://github.com/MrR0922" target="_blank">github.com/MrR0922</a></p>
+          <p data-i18n="contact.location">📍 Shenzhen, China · Available for on-site or remote</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer>
+    <div class="container">
+      <p data-i18n="footer.copyright">&copy; 2026 Tyler Ren (任天乐). Built with ❤️.</p>
+    </div>
+  </footer>
+
+  <!-- Vanta.js animated background + Spline 3D robot -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js"></script>
+
+  <!-- ====== TOAST ====== -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">✅</span>
+    <span>Copied: <span class="toast-email">tianle66666@gmail.com</span></span>
+  </div>
+
+  <script>
+    // ===== STATE =====
+    let currentLang = 'en';
+    let currentTheme = localStorage.getItem('tyler-theme') || 'light';
+
+    // ===== TRANSLATIONS =====
+    const t = {
+      'nav.about':          { en: 'About',     zh: '关于' },
+      'nav.skills':         { en: 'Skills',    zh: '技能' },
+      'nav.projects':       { en: 'Projects',  zh: '项目' },
+      'nav.education':      { en: 'Education', zh: '教育' },
+      'nav.blogs':          { en: 'Blogs',     zh: '博客' },
+      'nav.contact':        { en: 'Contact',   zh: '联系' },
+
+      'hero.subtitle':      { en: 'Robot Learning &amp; Embodied AI', zh: '机器人学习与具身智能' },
+      'hero.tagline':       { en: 'Building intelligent robotic systems that perceive, reason, and act — from simulation to the real world. Passionate about VLA, imitation learning, and bridging the sim-to-real gap.', zh: '构建能感知、推理和行动的智能机器人系统——从仿真到真实世界。专注于 VLA、模仿学习以及缩小 sim-to-real 差距。' },
+      'hero.btn.projects':  { en: 'View Projects', zh: '查看项目' },
+      'hero.btn.contact':   { en: 'Get In Touch',  zh: '联系我' },
+      'hero.location':      { en: '📍 Shenzhen, Guangdong, China', zh: '📍 广东·深圳' },
+
+      'about.label':        { en: 'About',      zh: '关于' },
+      'about.title':        { en: 'Who I Am',   zh: '关于我' },
+      'about.p1':           { en: "I'm an undergraduate researcher in Electronic Information Engineering at <strong>Shenzhen University</strong>, with a conditional offer for graduate studies at <strong>National University of Singapore (NUS)</strong>. My work focuses on <strong>embodied AI, robot learning, and vision-language-action (VLA) models</strong> — building systems that let robots understand natural language, perceive their environment, and execute dexterous manipulation.", zh: '我是<strong>深圳大学</strong>电子信息工程专业的本科生，已获<strong>新加坡国立大学 (NUS)</strong> 研究生有条件录取。我的研究方向是<strong>具身AI、机器人学习和视觉-语言-动作 (VLA) 模型</strong>——构建能让机器人理解自然语言、感知环境并执行灵巧操作的智能系统。' },
+      'about.p2':           { en: 'I have hands-on experience with the full robotics stack: from simulation in Isaac Lab and real-world teleoperation to imitation learning with ACT/Diffusion Policy and RL with PPO. I enjoy tackling the sim-to-real transfer problem and making robots robust in unstructured environments.', zh: '我具备完整的机器人全栈实践经验：从 Isaac Lab 仿真和真实遥操作，到基于 ACT/Diffusion Policy 的模仿学习和基于 PPO 的强化学习。我热衷于解决 sim-to-real 迁移问题，让机器人在非结构化环境中表现得更加鲁棒。' },
+      'about.p3':           { en: 'Available for internship starting <strong>June / July 2026</strong> — on-site or remote. Let\'s build the future of intelligent robotics together.', zh: '可于 <strong>2026 年 6 月 / 7 月</strong>开始实习，接受现场或远程岗位。让我们一起构建智能机器人的未来。' },
+      'about.btn':          { en: "Let's Talk", zh: '联系我' },
+
+      'stat.projects':      { en: 'Robot Learning Projects', zh: '机器人项目' },
+      'stat.province':      { en: 'Provincial Innovation Lead', zh: '省级大创负责人' },
+      'stat.awards':        { en: 'National Awards Won',      zh: '国家级奖项' },
+
+      'skills.label':       { en: 'Skills',                   zh: '技能' },
+      'skills.title':       { en: 'Technical Toolkit',        zh: '技术工具' },
+      'skills.desc':        { en: 'Technologies and frameworks I use to bring robotic intelligence from simulation to the real world.', zh: '我将机器人智能从仿真带到真实世界所使用的技术与框架。' },
+      'skills.cat1':        { en: '🤖 Robot Learning &amp; AI',     zh: '🤖 机器人学习与AI' },
+      'skills.cat2':        { en: '🧠 Deep Learning', zh: '🧠 深度学习' },
+      'skills.cat3':        { en: '⚡ Embedded &amp; Hardware',      zh: '⚡ 嵌入式与硬件' },
+      'skills.cat4':        { en: '💻 Programming &amp; Languages',  zh: '💻 编程与语言' },
+
+      'projects.label':     { en: 'Projects',              zh: '项目' },
+      'projects.title':     { en: 'Research &amp; Engineering', zh: '研究与工程' },
+      'projects.desc':      { en: 'A selection of my work in embodied AI, robotic manipulation, and vision-language-action systems. Click any card for full details.', zh: '我在具身AI、机器人操作和VLA系统中的代表性工作。点击卡片查看详细信息。' },
+      'projects.click':     { en: '💡 Click for details',  zh: '💡 点击查看详情' },
+
+      'edu.label':          { en: 'Education',              zh: '教育' },
+      'edu.title':          { en: 'Academic Background',    zh: '教育背景' },
+      'edu.desc':           { en: 'My journey in electronic engineering and intelligent systems.', zh: '我在电子工程与智能系统领域的求学之路。' },
+      'edu.szu.title':      { en: 'B.E. in Electronic Information Engineering', zh: '电子信息工程学士' },
+      'edu.szu.meta':       { en: 'Sep 2023 — Jun 2027 (Expected) · Shenzhen', zh: '2023.09 — 2027.06 (预计) · 深圳' },
+      'edu.szu.gpaLabel':   { en: 'GPA:', zh: 'GPA：' },
+      'edu.szu.coursesLabel':{ en: 'Relevant Coursework:', zh: '相关课程：' },
+      'edu.szu.courses':    { en: 'Machine Learning, Optimization, Digital Signal Processing, Circuit Analysis, C++ Programming', zh: '机器学习、最优化原理、数字信号处理、电路分析、C++程序设计' },
+      'edu.szu.badge':      { en: 'Class Monitor (班长)',   zh: '班长' },
+      'edu.nus.title':      { en: 'Graduate Studies (Conditional Offer)', zh: '研究生录取（Conditional Offer）' },
+      'edu.nus.meta':       { en: 'Aug 2027 (Anticipated) · Singapore', zh: '2027.08 入学 · 新加坡' },
+      'edu.nus.desc':       { en: 'Conditional offer for graduate studies in a related field. Building on my foundation in machine learning, robotics, and intelligent systems.', zh: '获得相关领域研究生有条件录取，在我机器学习、机器人与智能系统的基础上继续深造。' },
+
+      'comp.label':         { en: 'Honors',             zh: '荣誉' },
+      'comp.title':         { en: 'Competitions &amp; Awards', zh: '竞赛与奖项' },
+      'comp.desc':          { en: 'Recognition from national-level competitions in AI, embedded systems, and hardware design. Click for details.', zh: '在AI、嵌入式系统和硬件设计领域的国家级竞赛荣誉。点击查看详情。' },
+      'comp.click':         { en: '💡 Click for details', zh: '💡 点击查看详情' },
+
+      'more.label':         { en: 'Beyond the Lab',      zh: '实验室之外' },
+      'more.title':         { en: 'More About Me',       zh: '更多关于我' },
+      'more.p1':            { en: '<strong>🎓 Class Leader:</strong> Serving as class monitor (班长), coordinating class activities, organizing evaluation materials, and liaising with university-level review committees.', zh: '<strong>🎓 班级职务：</strong>担任班长，统筹班级活动、评优材料整理与校级评审对接。' },
+      'more.p2':            { en: '<strong>🏀 Sports:</strong> Member of the university basketball team, competing in the "President\'s Cup" (校长杯).', zh: '<strong>🏀 体育运动：</strong>校篮球队成员，参加校长杯篮球赛。' },
+      'more.p3':            { en: '<strong>🎹 Interests:</strong> Embodied AI, AI chips &amp; hardware, robotics, PCB design, basketball, and piano.', zh: '<strong>🎹 兴趣爱好：</strong>具身智能、AI芯片与硬件、机器人、PCB设计、篮球、钢琴。' },
+      'more.p4':            { en: '<strong>💼 Internship:</strong> Available from <strong>June / July 2026</strong>. Open to both on-site and remote positions.', zh: '<strong>💼 实习：</strong>可从 <strong>2026 年 6 月 / 7 月</strong>开始，接受现场或远程岗位。' },
+      'more.intern.title':  { en: '📬 Open for Internship', zh: '📬 实习机会开放' },
+      'more.intern.available':{ en: 'Available June/July 2026', zh: '2026年6月/7月可到岗' },
+      'more.intern.type':   { en: 'On-site · Remote',    zh: '现场 · 远程' },
+
+      'contact.label':      { en: 'Contact',             zh: '联系' },
+      'contact.title':      { en: 'Get In Touch',        zh: '取得联系' },
+      'contact.desc':       { en: "I'm always open to research collaborations, internship opportunities, and conversations about embodied AI.", zh: '我随时欢迎关于研究合作、实习机会和具身AI领域的交流。' },
+      'contact.card.title': { en: 'Say Hello 👋',        zh: '打个招呼 👋' },
+      'contact.card.desc':  { en: "Whether you have a project idea, an internship opportunity, or just want to connect about robotics — I'd love to hear from you.", zh: '无论你是有项目想法、实习机会，还是只是想聊聊机器人——我都很乐意与你交流。' },
+      'contact.location':   { en: '📍 Shenzhen, China · Available for on-site or remote', zh: '📍 广东深圳 · 接受现场或远程' },
+
+      'footer.copyright':   { en: '&copy; 2026 Tyler Ren (任天乐). Built with ❤️.', zh: '&copy; 2026 Tyler Ren (任天乐). ❤️ 制作。' }
+    };
+
+    // ===== PROJECT DATA =====
+    const projectData = {
+      project1: {
+        emoji: '🎙️🤖',
+        date: 'May 2026 — Present',
+        tags: ['VLA', 'Whisper', 'Grounding DINO', 'Isaac Lab', 'RTX 4080'],
+        title: { en: 'Mini-VLA: Voice-Controlled Visual Grasping', zh: 'Mini-VLA：语音控制视觉抓取机械臂' },
+        desc: { en: 'End-to-end pipeline enabling voice-controlled robotic grasping: speech → ASR (Whisper) → open-vocabulary detection (Grounding DINO) → 3D pose estimation → inverse kinematics → grasp execution.', zh: '构建完整 VLA 流水线：语音输入 → ASR（Whisper）→ 开放词汇目标检测（Grounding DINO）→ 3D 位姿估计 → 逆运动学解算 → 机械臂抓取。' },
+        highlights: { en: ['Speech → ASR → detection → 3D pose → IK → grasp', 'Simulation in Isaac Lab (Ubuntu + RTX 4080)', 'End-to-end perception, language, and action'], zh: ['语音输入 → ASR → 检测 → 3D位姿 → 逆运动学 → 抓取', '在 Isaac Lab (Ubuntu + RTX 4080) 中搭建仿真环境', '感知、语言与动作的端到端集成'] },
+        modal: { en: ['Mini-VLA is a full-stack Vision-Language-Action pipeline that enables a robotic arm to pick up objects through speech commands. The system integrates automatic speech recognition (Whisper), open-vocabulary visual grounding (Grounding DINO), 3D pose estimation, inverse kinematics solving, and low-level motor control into a unified framework.', 'The entire pipeline is first validated in simulation (Isaac Lab on Ubuntu + RTX 4080) before deployment to the real robot, minimizing hardware risk and accelerating iteration.'], zh: ['Mini-VLA 是一个全栈视觉-语言-动作（VLA）流水线，使机械臂能通过语音指令拾取物体。该系统将自动语音识别（Whisper）、开放词汇视觉定位（Grounding DINO）、3D位姿估计、逆运动学解算和底层电机控制集成到统一框架中。', '整个流水线先在 Isaac Lab（Ubuntu + RTX 4080）中仿真验证，再部署到真机，降低了硬件风险并加速迭代。'] }
+      },
+      project2: {
+        emoji: '🦾',
+        date: 'Mar 2026 — Present',
+        tags: ['ACT', 'Diffusion Policy', 'Imitation Learning', 'Transformer', 'CVAE'],
+        title: { en: 'ACT-Based Imitation Learning for Robotic Grasping', zh: '基于ACT的模仿学习机械臂抓取' },
+        desc: { en: 'Implemented ACT (Action Chunking with Transformers) for imitation learning: CVAE encodes demonstration sequences into latent variables for smooth execution.', zh: '实现 ACT（Action Chunking with Transformers）模仿学习：通过 CVAE 将示教序列编码为隐变量，实现平滑动作执行。' },
+        highlights: { en: ['Collected 50+ task demonstrations via teleoperation', '<strong>75%+</strong> seen / <strong>55%</strong> novel objects', 'Compared ACT vs Diffusion Policy baselines'], zh: ['采集 50+ 条遥操作示教轨迹', '已见物体 <strong>75%+</strong>，未见物体 <strong>55%</strong>', '对比 ACT 与 Diffusion Policy 基线'] },
+        modal: { en: ['Implemented ACT (Action Chunking with Transformers), a state-of-the-art imitation learning architecture that uses a Conditional VAE (CVAE) to encode demonstration trajectories into a compact latent space. The decoder then predicts chunked action sequences, producing smooth, high-frequency control policies from relatively few demonstrations.', '50+ task demonstrations were collected via teleoperation on a real 6-DOF robotic arm, recording joint angles, gripper states, and camera observations. The policy was evaluated on both seen and novel objects.'], zh: ['实现了 ACT（Action Chunking with Transformers），一种使用条件变分自编码器（CVAE）将示教轨迹编码到紧凑隐空间的先进模仿学习架构。解码器预测分块动作序列，从相对较少的示教中产生平滑的高频控制策略。', '通过遥操作在真实六自由度机械臂上采集了 50+ 条任务示教，记录关节角、夹爪状态和相机观测。在已见和未见物体上评估了策略表现。'] }
+      },
+      project3: {
+        emoji: '🧠',
+        date: 'Feb 2026 — May 2026',
+        tags: ['PPO', 'Isaac Lab', 'Reinforcement Learning', 'Franka Arm'],
+        title: { en: 'Reinforcement Learning for Robotic Arm Control (Isaac Lab)', zh: '基于Isaac Lab的机械臂强化学习控制' },
+        desc: { en: 'Trained a Franka arm on reaching and grasping tasks using PPO in Isaac Lab. Designed a hierarchical reward function combining sparse and dense rewards.', zh: '在 Isaac Lab 中使用 PPO 训练 Franka 机械臂完成物体到达与抓取任务，设计分层奖励函数。' },
+        highlights: { en: ['<strong>92% success rate</strong> after 3M+ steps on RTX 4080', 'Hierarchical reward: sparse + dense shaping', 'Sim-to-real: domain randomization, noise injection'], zh: ['在 RTX 4080 上 300万+ 步，达到 <strong>92%</strong> 成功率', '分层奖励函数：稀疏 + 密集 shaping 奖励', 'Sim-to-real：域随机化、观测噪声注入'] },
+        modal: { en: ['Trained a Franka Emika Panda robotic arm on reaching and grasping tasks using Proximal Policy Optimization (PPO) within NVIDIA Isaac Lab. Designed a hierarchical reward function that combines sparse task-completion rewards with dense shaping rewards to ensure stable convergence.', 'The training ran for over 3 million environment steps on an RTX 4080 GPU, achieving a 92% task success rate. Extensive analysis was performed on training curves, reward sensitivity, and failure modes.'], zh: ['在 NVIDIA Isaac Lab 中使用 PPO 训练 Franka Emika Panda 机械臂完成到达与抓取任务。设计分层奖励函数，结合稀疏任务完成奖励与密集 shaping 奖励以保证收敛稳定性。', '在 RTX 4080 上运行超过 300万 环境步，达到 92% 任务成功率。对训练曲线、奖励敏感度和失败模式进行了深入分析。'] }
+      }
+    };
+
+    const compData = {
+      comp1: {
+        emoji: '🏆', date: '2025', year: '2025', badge: '🥇',
+        img: 'ican_certificate.jpg',
+        title: { en: 'ICAN AI Challenge — National Second Prize', zh: 'ICAN人工智能挑战赛 — 全国二等奖' },
+        desc: { en: 'Designed "Psychosiol" — a wearable depression monitoring system integrating multi-modal physiological sensors, with 95.21% individual and 90.75% cross-individual recognition accuracy.', zh: '设计"心晴Psychosiol"——基于可穿戴设备的抑郁症监测系统，融合多模态生理传感器，单个体识别准确率95.21%，跨个体达90.75%。' },
+        modalSubtitle: { en: 'Wearable AI for mental health — ICAN Innovation Contest', zh: '可穿戴AI心理健康监测 — ICAN创新大赛' },
+        tags: ['Wearable', 'Deep Learning', 'Mental Health', 'LSTM', 'BLE', 'Android'],
+        modal: {
+          en: ['<strong>Psychosiol</strong> is a wearable depression monitoring system designed for the ICAN AI Challenge. It integrates temperature, blood oxygen (SpO₂), heart rate (PPG), and galvanic skin response (GSR) sensors into a wristband device, transmitting data via BLE to an Android app for real-time depression detection and episode monitoring.', 'The system uses an <strong>STM32C8T6</strong> microcontroller with modular PCB design (stacked mainboard + baseboard) for compact size. Sensors include Max30102 (SpO₂/HR), LMT70 (temperature), Pulse-Sensor (heart rate), and Grove-GSR (skin response). Power management uses a read-sleep cycle to extend battery life.', 'The Android app (MVVM architecture with Jetpack) features real-time physiological monitoring, depression recognition, episode alerting, mood diary, questionnaire assessment, and a doctor/manager dashboard. It uses <strong>Chaquopy</strong> for Python-Kotlin hybrid deployment of deep learning models.', 'The core algorithm employs <strong>LSTM Multimodal Fusion Network (LMFN)</strong> for depression recognition and <strong>UDA-DR</strong> (unsupervised domain adaptation) for cross-individual generalization. For episode monitoring, a <strong>few-shot learning method (FSL-DEM)</strong> achieves rapid adaptation with limited labeled samples. Clinical validation at Guangdong Second Provincial People\'s Hospital (35 participants) yielded <strong>95.21% individual accuracy</strong> and <strong>90.75% cross-individual accuracy</strong>, with <strong>93.52% episode monitoring accuracy</strong>.'],
+          zh: ['<strong>心晴Psychosiol</strong> 是一款为ICAN人工智能挑战赛设计的基于可穿戴设备的抑郁症监测系统。该系统将体温、血氧（SpO₂）、心率（PPG）和皮肤电（GSR）四种传感器集成到腕带设备中，通过低功耗蓝牙将数据传输至安卓APP，实现实时抑郁症识别和发作监测。', '硬件采用<strong>STM32C8T6</strong>微控制器和模块化PCB设计（主控板+底板叠层），集成Max30102血氧心率传感器、LMT70高精度体温传感器、Pulse-Sensor心率传感器和Grove-GSR皮肤电传感器。采用读取-休眠模式的智能电源管理策略，有效延长续航能力。', '安卓APP基于MVVM架构（Android Jetpack），提供实时生理数据监测、抑郁症识别、发作监测报警、心情日记、量表测评以及医生/管理者端等功能。利用<strong>Chaquopy</strong>实现Python-Kotlin混合开发，在移动端部署深度学习模型。', '核心算法采用<strong>基于LSTM的多模态融合网络（LMFN）</strong>进行抑郁症识别，提出<strong>无监督领域适应方法（UDA-DR）</strong>实现跨个体泛化，解决生理信号个体差异大的问题。发作监测采用<strong>小样本学习方法（FSL-DEM）</strong>，在有限标注样本下快速适应新个体。经广东省第二人民医院临床验证（35名参与者），系统达到<strong>单个体95.21%</strong>、<strong>跨个体90.75%</strong>的抑郁症识别准确率，发作监测平均准确率<strong>93.52%</strong>。'] }
+      },
+      comp2: {
+        emoji: '🏆', date: '2025', year: '2025', badge: '🥈', badgeClass: 'silver',
+        img: 'competition_photo.jpg',
+        title: { en: 'College Student Electronic Design Competition (A题) — Provincial Second Prize', zh: '全国大学生电子设计竞赛（A题）— 省二等奖' },
+        desc: { en: 'Designed an energy-recycling converter load testing device with three-phase SVPWM inverter, achieving 1.52% THD, 0.219% load regulation, and closed-loop energy feedback.', zh: '设计能量回馈的变流器负载试验装置，基于SVPWM三相逆变，THD仅1.52%，负载调整率0.219%，实现能量闭环回馈。' },
+        modalSubtitle: { en: 'National electronic system design competition — 4-day intensive development', zh: '全国大学生电子设计竞赛 — 4天极限开发' },
+        tags: ['SVPWM', 'STM32F4', 'Energy Feedback', 'PI Control', 'AD7606', 'THD 1.52%'],
+        modal: {
+          en: ['Our team designed and built an <strong>energy-recycling converter load testing device</strong> (Problem A) for the 2025 National College Student Electronic Design Competition. The system integrates a DC-AC three-phase inverter, AC-DC three-phase rectifier, and DC-DC boost converter into a unified energy-recycling framework.', 'The inverter uses <strong>SVPWM (Space Vector Pulse Width Modulation)</strong> controlled by an STM32F407 microcontroller, achieving 15% higher voltage utilization than traditional SPWM. The gate driver uses the IR2103 half-bridge IC with built-in dead-time protection.', 'For sensing, we used an <strong>AD637 true RMS-to-DC converter</strong> for precise AC measurements and an <strong>AD7606 8-channel simultaneous sampling ADC</strong> (200 kSPS) with built-in anti-aliasing filters for accurate data acquisition. A PI closed-loop controller adjusts the SVPWM duty cycle to maintain constant voltage or current output.', 'The energy feedback path rectifies the inverter\'s AC output via a three-phase diode bridge, then passes through an isolated DC-DC buck converter for electrical isolation, followed by a boost converter that returns energy to the DC input — achieving efficient closed-loop energy recycling.'],
+          zh: ['我们为2025年全国大学生电子设计竞赛设计了<strong>能量回馈的变流器负载试验装置</strong>（A题）。该系统将DC-AC三相逆变、AC-DC三相整流和DC-DC升压变换集成到统一的能量回馈架构中。', '逆变器采用基于<strong>STM32F407</strong>的<strong>SVPWM（空间矢量脉宽调制）</strong>控制算法，相比传统SPWM电压利用率提高约15%。驱动芯片选用IR2103半桥驱动器，内置死区保护。', '采样方面，使用<strong>AD637真有效值转换器</strong>实现高精度交流测量，配合<strong>AD7606八通道同步采样ADC</strong>（200 kSPS采样率，内置抗混叠滤波器）确保数据采集精度。通过PI闭环控制器调节SVPWM占空比实现恒压或恒流输出。', '能量回馈路径：逆变器输出的交流电经三相全桥整流为直流，通过隔离型DC-DC降压电路实现电气隔离，再经DC-DC升压电路将电压提升至与直流输入匹配，最终回馈到输入端，形成高效的能量闭环循环。']
+        }
+      },
+      comp3: {
+        emoji: '🏆', date: '2025', year: '2025', badge: '🥉', badgeClass: 'bronze',
+        title: { en: 'RISC-V Innovation &amp; Entrepreneurship Competition — National Third Prize', zh: 'RISC-V创新创业大赛 — 全国三等奖' },
+        desc: { en: 'Developed an embedded system on the RISC-V platform, showcasing hardware-software co-design skills.', zh: '基于RISC-V平台完成嵌入式系统开发，展示软硬件协同设计能力。' },
+        modalSubtitle: { en: 'National RISC-V ecosystem competition', zh: '国家级RISC-V生态竞赛' },
+        tags: ['RISC-V', 'Embedded Systems', 'Processor Architecture'],
+        modal: { en: ['The RISC-V Innovation & Entrepreneurship Competition promotes the open-source RISC-V ecosystem.', 'Our project demonstrated custom peripheral integration and optimized software stacks on RISC-V.'], zh: ['RISC-V创新创业大赛推广开源RISC-V生态。', '我们的项目展示了RISC-V上的自定义外设集成和优化软件栈。'] }
+      }
+    };
+
+    // ===== RENDER =====
+    function renderProjects(lang) {
+      const grid = document.getElementById('projectGrid');
+      let html = '';
+      Object.values(projectData).forEach((p, i) => {
+        const key = ['project1','project2','project3'][i];
+        html += `<div class="project-card reveal" onclick="openModal('${key}')">
+          <div class="emoji">${p.emoji}</div>
+          <div class="date">${p.date}</div>
+          <h3>${p.title[lang]}</h3>
+          <p>${p.desc[lang]}</p>
+          <ul class="project-highlights">${p.highlights[lang].slice(0,2).map(h => `<li>${h}</li>`).join('')}</ul>
+          <div class="project-tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
+          <div class="click-hint">${t['projects.click'][lang]}</div>
+        </div>`;
+      });
+      grid.innerHTML = html;
+    }
+
+    function renderCompetitions(lang) {
+      const grid = document.getElementById('compGrid');
+      let html = '';
+      Object.entries(compData).forEach(([key, c]) => {
+        html += `<div class="comp-item reveal" onclick="openModal('${key}')">
+          <span class="badge ${c.badgeClass || ''}">${c.badge}</span>
+          <div>
+            <h4>${c.title[lang]}</h4>
+            <p>${c.desc[lang]}</p>
+            <p style="font-size:.85rem;color:var(--text-light);margin-top:4px;">${c.year}</p>
+            <div class="click-hint">${t['comp.click'][lang]}</div>
+          </div>
+        </div>`;
+      });
+      grid.innerHTML = html;
+    }
+
+    // ===== I18N =====
+    function applyLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('tyler-lang', lang);
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] && t[key][lang]) el.innerHTML = t[key][lang];
+      });
+      document.getElementById('langToggle').textContent = lang === 'en' ? '中' : 'EN';
+      document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
+      renderProjects(lang);
+      renderCompetitions(lang);
+      requestAnimationFrame(() => observeReveals());
+    }
+
+    // ===== THEME =====
+    function applyTheme(theme) {
+      currentTheme = theme;
+      document.body.classList.toggle('dark', theme === 'dark');
+      document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀️' : '🌙';
+      localStorage.setItem('tyler-theme', theme);
+      const avatar = document.getElementById('heroAvatar');
+      if (avatar) avatar.style.borderColor = theme === 'dark' ? 'var(--bg-card)' : '#fff';
+      initVanta();
+    }
+
+    // ===== MODAL =====
+    function openModal(id) {
+      const data = compData[id] || projectData[id];
+      if (!data) return;
+      const lang = currentLang;
+      const isComp = !!compData[id];
+      let html = `${data.emoji ? `<div class="modal-emoji">${data.emoji}</div>` : ''}<div class="modal-date">${data.date}</div><h2>${data.title[lang]}</h2>${data.modalSubtitle ? `<div class="modal-subtitle">${data.modalSubtitle[lang]}</div>` : ''}<div class="modal-tags">${(data.tags||[]).map(t => `<span>${t}</span>`).join('')}</div>`;
+      if (data.modal) html += data.modal[lang].map(p => `<p>${p}</p>`).join('');
+      if (data.img) html += `<img src="${data.img}" alt="${data.title[lang]}" class="modal-img" />`;
+      if (!isComp && data.highlights) html += `<h3>${lang === 'en' ? 'Key Results' : '关键成果'}</h3><ul>${data.highlights[lang].map(h => `<li>${h}</li>`).join('')}</ul>`;
+      document.getElementById('modalBody').innerHTML = html;
+      document.getElementById('modalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // ===== MODAL EVENTS =====
+    document.getElementById('modalClose').addEventListener('click', () => { closeModal(); });
+    document.getElementById('modalOverlay').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+
+    // ===== COPY EMAIL =====
+    function copyEmail() {
+      const email = 'tianle66666@gmail.com';
+      navigator.clipboard.writeText(email).then(() => {
+        showToast();
+      }).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = email;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast();
+      });
+    }
+
+    function showToast() {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      clearTimeout(toast._timer);
+      toast._timer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    // ===== NAV MOBILE =====
+    document.getElementById('navToggle').addEventListener('click', () => { document.getElementById('navLinks').classList.toggle('open'); });
+    document.querySelectorAll('#navLinks a').forEach(a => { a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')); });
+
+    // ===== TOGGLES =====
+    document.getElementById('langToggle').addEventListener('click', () => { applyLanguage(currentLang === 'en' ? 'zh' : 'en'); });
+    document.getElementById('themeToggle').addEventListener('click', () => { applyTheme(currentTheme === 'light' ? 'dark' : 'light'); });
+
+    // ===== SCROLL REVEAL =====
+    let ro = null;
+    function observeReveals() {
+      if (ro) ro.disconnect();
+      ro = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+    }
+
+    // ===== VANTA BACKGROUND =====
+    function initVanta() {
+      if (window.vantaEffect) window.vantaEffect.destroy();
+      if (window.vantaGlobe) window.vantaGlobe.destroy();
+      const color = currentTheme === 'dark' ? 0x2a2a50 : 0x4361ee;
+      const bgColor = currentTheme === 'dark' ? 0x0d0d1a : 0xf0f4ff;
+      window.vantaEffect = VANTA.NET({
+        el: "#vanta-bg",
+        mouseControls: true, touchControls: true, gyroControls: false,
+        minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00,
+        color: color, backgroundColor: bgColor, points: 12, maxDistance: 22, spacing: 18
+      });
+      window.vantaGlobe = VANTA.GLOBE({
+        el: "#vanta-about",
+        mouseControls: true, touchControls: true, gyroControls: false,
+        minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00,
+        color: color, backgroundColor: bgColor
+      });
+    }
+
+    // ===== INIT =====
+    applyTheme(currentTheme);
+    const savedLang = localStorage.getItem('tyler-lang') || 'en';
+    applyLanguage(savedLang);
+    initVanta();
+  </script>
+</body>
+</html>

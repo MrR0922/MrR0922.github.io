@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blogs — Tyler Ren</title>
+
+  <style>
+    :root {
+      --bg-page: #fafafa; --bg-card: #ffffff; --bg-soft: #f5f7fa;
+      --bg-nav: rgba(255,255,255,.88); --bg-tag: #fff; --bg-tag-bd: #e0e4ec;
+      --text-primary: #1a1a2e; --text-secondary: #555; --text-muted: #666; --text-soft: #777; --text-light: #999;
+      --accent: #4361ee; --accent-hover: #3a0ca3;
+      --bd: #eef0f4; --bd-strong: #dde0e8;
+      --shadow-card: 0 8px 24px rgba(0,0,0,.05);
+      --nav-blur: blur(12px);
+      --scroll-thumb: #d0d4dc;
+    }
+    body.dark {
+      --bg-page: #0d0d1a; --bg-card: #16162a; --bg-soft: #12122a;
+      --bg-nav: rgba(13,13,26,.92); --bg-tag: #1e1e38; --bg-tag-bd: #333358;
+      --text-primary: #e8e8f0; --text-secondary: #a0a0b8; --text-muted: #8888a0; --text-soft: #8888a0; --text-light: #666680;
+      --accent: #5a7aff; --accent-hover: #7b9aff;
+      --bd: #2a2a44; --bd-strong: #3a3a58;
+      --shadow-card: 0 8px 24px rgba(0,0,0,.3);
+      --nav-blur: blur(16px);
+      --scroll-thumb: #3a3a58;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      background: var(--bg-page); color: var(--text-primary);
+      line-height: 1.7; transition: background .35s, color .35s;
+    }
+    .content-overlay {
+      position: relative; z-index: 1;
+      background: var(--bg-page); opacity: 0.88;
+      min-height: 100vh;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); }
+    ul { list-style: none; }
+    .container { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+
+    /* ====== NAV (same as main page) ====== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--bg-nav);
+      backdrop-filter: var(--nav-blur);
+      border-bottom: 1px solid var(--bd);
+    }
+    nav .container {
+      display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 12px;
+    }
+    .nav-logo {
+      font-weight: 700; font-size: 1.2rem; color: var(--text-primary); white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo img { height: 28px; width: auto; display: block; }
+    .nav-logo .logo-dark { display: none; }
+    body.dark .nav-logo .logo-light { display: none; }
+    body.dark .nav-logo .logo-dark { display: block; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      font-size: .9rem; font-weight: 500; color: var(--text-secondary);
+      position: relative; padding-bottom: 2px; white-space: nowrap;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 2px;
+      background: var(--accent); transition: width .3s;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover { color: var(--text-primary); }
+    /* Active link (Blogs) */
+    .nav-links a.active { color: var(--text-primary); }
+    .nav-links a.active::after { width: 100%; }
+
+    .nav-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+    .nav-blog-btn {
+      font-size: .9rem; font-weight: 500; color: var(--text-secondary);
+      padding: 0 10px; transition: color .2s; white-space: nowrap;
+    }
+    .nav-blog-btn:hover { color: var(--text-primary); }
+    .nav-blog-btn.active { color: var(--text-primary); font-weight: 600; }
+    .icon-btn {
+      width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--bd);
+      background: transparent; color: var(--text-secondary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; transition: all .25s; flex-shrink: 0;
+    }
+    .icon-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--bg-soft); }
+    .icon-btn.lang-btn { font-size: .8rem; font-weight: 700; width: 38px; letter-spacing: .02em; }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text-primary); transition: .3s; border-radius: 1px; }
+
+    /* ====== HEADER ====== */
+    .page-header {
+      padding: 120px 0 48px; text-align: center;
+    }
+    .page-header h1 { font-size: 2.6rem; font-weight: 800; }
+    .page-header p { color: var(--text-soft); margin-top: 8px; font-size: 1.05rem; }
+
+    /* ====== BLOG LIST ====== */
+    .blog-list { padding-bottom: 80px; }
+    .blog-card {
+      background: var(--bg-card); border-radius: 14px; padding: 28px 32px;
+      border: 1px solid var(--bd); margin-bottom: 20px; cursor: pointer;
+      transition: all .3s;
+    }
+    .blog-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); border-color: var(--accent); }
+    .blog-card .date { font-size: .82rem; color: var(--text-light); font-weight: 500; margin-bottom: 6px; }
+    .blog-card h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; }
+    .blog-card .excerpt { font-size: .95rem; color: var(--text-muted); margin-bottom: 12px; }
+    .blog-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .blog-tags span {
+      font-size: .78rem; padding: 3px 10px; border-radius: 20px;
+      background: var(--bg-soft); color: var(--text-secondary);
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      text-align: center; padding: 32px 24px; border-top: 1px solid var(--bd);
+      font-size: .85rem; color: var(--text-light);
+    }
+
+    /* ====== TOAST ====== */
+    .toast {
+      position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px);
+      z-index: 999; background: var(--bg-card); color: var(--text-primary);
+      padding: 14px 28px; border-radius: 12px; border: 1px solid var(--bd);
+      box-shadow: 0 8px 30px rgba(0,0,0,.12); font-size: .95rem; font-weight: 500;
+      opacity: 0; pointer-events: none; transition: all .4s ease;
+      display: flex; align-items: center; gap: 10px; white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0;
+        background: var(--bg-nav); flex-direction: column; gap: 0;
+        border-bottom: 1px solid var(--bd); padding: 8px 24px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 14px 0; border-bottom: 1px solid var(--bd); }
+      .nav-links a.active { color: var(--accent); }
+      .nav-links a.active::after { width: 0; }
+      .nav-toggle { display: flex; }
+      .page-header h1 { font-size: 2rem; }
+      .blog-card { padding: 20px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="vanta-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;"></div>
+  <div class="content-overlay">
+
+  <!-- ====== NAV (identical to main page) ====== -->
+  <nav>
+    <div class="container">
+      <a href="portfolio.html" class="nav-logo">
+        <img src="logo-light.png" alt="Tyler Ren" class="logo-light" />
+        <img src="logo-dark.png" alt="Tyler Ren" class="logo-dark" />
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="portfolio.html" data-i18n="nav.about">About</a>
+        <a href="portfolio.html#skills" data-i18n="nav.skills">Skills</a>
+        <a href="portfolio.html#projects" data-i18n="nav.projects">Projects</a>
+        <a href="portfolio.html#education" data-i18n="nav.education">Education</a>
+        <a href="portfolio.html#contact" data-i18n="nav.contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="blogs.html" class="nav-blog-btn active" data-i18n="nav.blogs">Blogs</a>
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
+        <button class="icon-btn lang-btn" id="langToggle">中</button>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ====== PAGE HEADER ====== -->
+  <div class="page-header">
+    <div class="container">
+      <h1 data-i18n="blogs.title">Blogs</h1>
+      <p data-i18n="blogs.subtitle">Thoughts on robotics, embodied AI, and building things that matter.</p>
+    </div>
+  </div>
+
+  <!-- ====== BLOG LIST ====== -->
+  <section class="blog-list">
+    <div class="container" id="blogContainer"></div>
+  </section>
+
+  <!-- ====== TOAST ====== -->
+  <div class="toast" id="toast">
+    <span style="font-size:1.2rem;">🚧</span>
+    <span data-i18n="blogs.placeholder">Coming soon — this page is under construction</span>
+  </div>
+
+  </div><!-- /content-overlay -->
+
+  <!-- ====== FOOTER ====== -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Tyler Ren (任天乐). Built with ❤️.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+  <script>
+    // ===== VANTA BIRDS =====
+    let vantaBirds = null;
+    function initVanta() {
+      if (vantaBirds) vantaBirds.destroy();
+      const isDark = document.body.classList.contains('dark');
+      const color = isDark ? 0x2a2a50 : 0x4361ee;
+      const bgColor = isDark ? 0x0d0d1a : 0xfafafa;
+      vantaBirds = VANTA.BIRDS({
+        el: "#vanta-bg",
+        mouseControls: true, touchControls: true, gyroControls: false,
+        minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00,
+        color: color, backgroundColor: bgColor
+      });
+    }
+    const t = {
+      'nav.about':    { en: 'About',    zh: '关于' },
+      'nav.skills':   { en: 'Skills',   zh: '技能' },
+      'nav.projects': { en: 'Projects', zh: '项目' },
+      'nav.education':{ en: 'Education',zh: '教育' },
+      'nav.blogs':    { en: 'Blogs',    zh: '博客' },
+      'nav.contact':  { en: 'Contact',  zh: '联系' },
+      'blogs.title':  { en: 'Blogs',    zh: '博客' },
+      'blogs.subtitle':{ en: 'Thoughts on robotics, embodied AI, and building things that matter.', zh: '关于机器人、具身智能和构建有意义事物的思考。' },
+      'blogs.placeholder':{ en: 'Coming soon — this page is under construction', zh: '即将上线——页面正在建设中' }
+    };
+    let currentLang = localStorage.getItem('tyler-lang') || 'en';
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('tyler-lang', lang);
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] && t[key][lang]) el.innerHTML = t[key][lang];
+      });
+      document.getElementById('langToggle').textContent = lang === 'en' ? '中' : 'EN';
+      document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
+    }
+
+    // ===== THEME =====
+    function applyTheme(theme) {
+      document.body.classList.toggle('dark', theme === 'dark');
+      document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀️' : '🌙';
+      localStorage.setItem('tyler-theme', theme);
+      initVanta();
+    }
+
+    // ===== BLOG DATA =====
+    const blogData = [
+      {
+        date: { en: 'Jun 13, 2026', zh: '2026年6月13日' },
+        title: { en: 'Building a Mini-VLA Pipeline from Scratch', zh: '从零搭建 Mini-VLA 流水线' },
+        excerpt: { en: 'A deep dive into integrating Whisper ASR, Grounding DINO, and inverse kinematics for voice-controlled robotic grasping — lessons learned and failure modes encountered.', zh: '深度解析如何将 Whisper ASR、Grounding DINO 和逆运动学集成为语音控制机械臂抓取系统——遇到的坑和学到的经验。' },
+        tags: ['VLA', 'Whisper', 'Grounding DINO', 'Isaac Lab']
+      },
+      {
+        date: { en: 'May 20, 2026', zh: '2026年5月20日' },
+        title: { en: 'ACT vs Diffusion Policy: A Practical Comparison', zh: 'ACT vs Diffusion Policy：实用对比' },
+        excerpt: { en: 'We compare Action Chunking with Transformers and Diffusion Policy for imitation learning on a real 6-DOF robotic arm — covering smoothness, inference speed, and data efficiency.', zh: '在真实六自由度机械臂上对比 ACT 和 Diffusion Policy 模仿学习方法，涵盖动作平滑度、推理速度和数据效率。' },
+        tags: ['ACT', 'Diffusion Policy', 'Imitation Learning']
+      },
+      {
+        date: { en: 'Apr 8, 2026', zh: '2026年4月8日' },
+        title: { en: 'Sim-to-Real Transfer: What Worked and What Didnt', zh: 'Sim-to-Real 迁移：哪些方法有效' },
+        excerpt: { en: 'Training a Franka arm with PPO in Isaac Lab and transferring to the real world — domain randomization strategies, observation noise injection, and policy robustness.', zh: '在 Isaac Lab 中用 PPO 训练 Franka 机械臂并迁移到真实世界——域随机化策略、观测噪声注入和策略鲁棒性分析。' },
+        tags: ['PPO', 'Isaac Lab', 'Sim-to-Real']
+      },
+      {
+        date: { en: 'Feb 15, 2026', zh: '2026年2月15日' },
+        title: { en: 'Designing Psychosiol: A Wearable Depression Monitoring System', zh: '设计心晴：可穿戴抑郁症监测系统' },
+        excerpt: { en: 'How we built a wristband device integrating 4 physiological sensors, deployed LSTM-based models on Android, and achieved 95%+ accuracy in clinical validation.', zh: '如何构建集成四种生理传感器的腕带设备，在安卓上部署 LSTM 模型，并在临床验证中达到 95%+ 的准确率。' },
+        tags: ['Wearable', 'Deep Learning', 'Mental Health', 'Android']
+      },
+      {
+        date: { en: 'Jan 2026', zh: '2026年1月' },
+        title: { en: 'Getting Started with Isaac Lab for Robot Learning', zh: 'Isaac Lab 机器人学习入门' },
+        excerpt: { en: 'A beginner-friendly guide to setting up NVIDIA Isaac Lab, creating environments, and training your first reinforcement learning policy for robotic arm control.', zh: 'NVIDIA Isaac Lab 的新手入门指南：环境搭建、创建仿真场景，以及训练你的第一个机械臂强化学习策略。' },
+        tags: ['Isaac Lab', 'Tutorial', 'Reinforcement Learning']
+      }
+    ];
+
+    // ===== RENDER BLOG LIST =====
+    function renderBlogs(lang) {
+      const container = document.getElementById('blogContainer');
+      let html = '';
+      blogData.forEach(post => {
+        html += `<div class="blog-card" onclick="showToast()">
+          <div class="date">${post.date[lang]}</div>
+          <h2>${post.title[lang]}</h2>
+          <div class="excerpt">${post.excerpt[lang]}</div>
+          <div class="blog-tags">${post.tags.map(t => `<span>${t}</span>`).join('')}</div>
+        </div>`;
+      });
+      container.innerHTML = html;
+    }
+
+    // ===== TOAST =====
+    function showToast() {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      clearTimeout(toast._timer);
+      toast._timer = setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // ===== MOBILE NAV =====
+    document.getElementById('navToggle').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+    document.querySelectorAll('#navLinks a').forEach(a => {
+      a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+    });
+
+    // ===== TOGGLES =====
+    const savedTheme = localStorage.getItem('tyler-theme') || 'light';
+    applyTheme(savedTheme);
+    applyLanguage(currentLang);
+    renderBlogs(currentLang);
+
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      applyTheme(document.body.classList.contains('dark') ? 'light' : 'dark');
+    });
+
+    document.getElementById('langToggle').addEventListener('click', () => {
+      const next = currentLang === 'en' ? 'zh' : 'en';
+      applyLanguage(next);
+      renderBlogs(next);
+    });
+  </script>
+
+</body>
+</html>
