@@ -1,0 +1,78 @@
+- lang: "zh"
+  name: "任天乐"
+  motivation: "机器人学习与具身智能研究者"
+  photo: "/assets/img/tyler-ren.jpg"
+  email: "tianle66666@gmail.com"
+  github: "MrR0922"
+  website: "https://mrr0922.github.io"
+  languages: [{idiom: "中文"}, {idiom: "English (IELTS 6.0)"}]
+  educations:
+    - {degree: "电子信息工程学士", university: "深圳大学", time: "2023–2026"}
+    - {degree: "", university: "新加坡国立大学苏州研究院", time: "2026–现在"}
+  skills:
+    - {title: "机器人学习", skill: ["ACT", "Diffusion Policy", "PPO", "Imitation Learning", "VLA"]}
+    - {title: "计算机视觉", skill: ["ViT", "CLIP", "DINO", "CNN", "Transformer", "DDPM"]}
+    - {title: "平台与框架", skill: ["Isaac Lab", "ROS / ROS2", "MoveIt", "LeRobot", "PyTorch"]}
+    - {title: "编程语言", skill: ["Python", "C / C++"]}
+  experience:
+    - role: "基于 GR00T N1 的 SO-101 机械臂 VLA 后训练与 Sim-to-Real 迁移"
+      company: "机器人学习项目"
+      time: "2026–至今"
+      details: "面向试管收纳任务适配 GR00T N1；融合约 75 条真实示范、仿真轨迹与 Cosmos 生成数据进行联合训练，并在 SO-101 实体机械臂上完成部署评测。"
+      tech: "GR00T N1、Isaac Sim / Isaac Lab、LeRobot、NVIDIA Cosmos、PyTorch"
+    - role: "基于 LingBot-VLA2 的 RoboTwin 双臂操作策略后训练"
+      company: "机器人学习项目（进行中）"
+      time: "2026–至今"
+      details: "规划 LingBot-VLA2 与 RoboTwin 的接口适配、SFT / Behavior Cloning 后训练流程及仿真任务评测方案。"
+      tech: "LingBot-VLA2、RoboTwin、PyTorch、SFT、Behavior Cloning"
+    - role: "ACT 机器人抓取模仿学习"
+      company: "个人研究项目"
+      time: "2026.03–至今"
+      details: "实现 ACT / CVAE 策略并采集 50+ 条遥操作示教，评估策略泛化能力。"
+      tech: "ACT、CVAE、Diffusion Policy、PyTorch"
+  honors:
+    - "2025 ICAN 人工智能挑战赛全国二等奖"
+    - "2025 全国大学生电子设计竞赛省二等奖"
+    - "2025 RISC-V 创新创业大赛全国三等奖"
+  publications: []
+  introduction:
+    - {title: "研究兴趣", content: "机器人学习、具身智能、视觉-语言-动作模型、模仿学习、强化学习与 Sim-to-Real。"}
+- lang: "en"
+  name: "Tyler Ren"
+  motivation: "Robot Learning & Embodied AI Researcher"
+  photo: "/assets/img/tyler-ren.jpg"
+  email: "tianle66666@gmail.com"
+  github: "MrR0922"
+  website: "https://mrr0922.github.io"
+  languages: [{idiom: "Chinese"}, {idiom: "English (IELTS 6.0)"}]
+  educations:
+    - {degree: "B.E. in Electronic Information Engineering", university: "Shenzhen University", time: "2023–2026"}
+    - {degree: "", university: "National University of Singapore (Suzhou) Research Institute", time: "2026–present"}
+  skills:
+    - {title: "Robot Learning", skill: ["ACT", "Diffusion Policy", "PPO", "Imitation Learning", "VLA"]}
+    - {title: "Computer Vision", skill: ["ViT", "CLIP", "DINO", "CNN", "Transformer", "DDPM"]}
+    - {title: "Platforms", skill: ["Isaac Lab", "ROS / ROS2", "MoveIt", "LeRobot", "PyTorch"]}
+    - {title: "Programming Languages", skill: ["Python", "C / C++"]}
+  experience:
+    - role: "GR00T N1 VLA Post-Training and Sim-to-Real Transfer for SO-101"
+      company: "Robot learning project"
+      time: "2026–Present"
+      details: "Adapted GR00T N1 for a test-tube organization task, co-trained on approximately 75 real demonstrations, simulation trajectories, and Cosmos-generated data, and evaluated the policy on a physical SO-101 arm."
+      tech: "GR00T N1, Isaac Sim / Isaac Lab, LeRobot, NVIDIA Cosmos, PyTorch"
+    - role: "LingBot-VLA2 Post-Training for RoboTwin Bimanual Manipulation"
+      company: "Robot learning project (in progress)"
+      time: "2026–Present"
+      details: "Planning LingBot-VLA2 and RoboTwin interface adaptation, an SFT / Behavior Cloning post-training pipeline, and simulation evaluation protocols."
+      tech: "LingBot-VLA2, RoboTwin, PyTorch, SFT, Behavior Cloning"
+    - role: "ACT-Based Imitation Learning"
+      company: "Independent research project"
+      time: "2026.03–Present"
+      details: "Implemented an ACT / CVAE policy and collected 50+ teleoperated demonstrations."
+      tech: "ACT, CVAE, Diffusion Policy, PyTorch"
+  honors:
+    - "ICAN AI Challenge — National Second Prize, 2025"
+    - "Electronic Design Competition — Provincial Second Prize, 2025"
+    - "RISC-V Innovation Competition — National Third Prize, 2025"
+  publications: []
+  introduction:
+    - {title: "Research Interests", content: "Robot learning, embodied AI, VLA models, imitation learning, reinforcement learning, and sim-to-real transfer."}
