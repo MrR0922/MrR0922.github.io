@@ -143,7 +143,7 @@
                     </div>
                 </section>
                 {% endif %}
-                {% if cv.publications %}
+                {% if cv.publications and cv.publications.size > 0 %}
                 <section class="publications">
                     <div class="title">{% if cv.lang == "zh" %}论文发表{% else %}Publications{% endif %}</div>
                     <ol class="publications-item">
