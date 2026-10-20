@@ -33,11 +33,11 @@
     - role: "智能三相逆变器"
       company: "全国大学生电子设计竞赛"
       time: "2025"
-      details: "参与智能三相逆变器项目，负责软硬件联调，项目获省二等奖。"
+      details: "参与智能三相逆变器项目，负责软硬件联调，项目获广东赛区二等奖。"
       tech: "三相逆变器、软硬件联调"
   honors:
     - "2025 ICAN 人工智能挑战赛全国二等奖"
-    - "2025 全国大学生电子设计竞赛省二等奖"
+    - "2025 全国大学生电子设计竞赛广东赛区二等奖"
     - "2025 RISC-V 创新创业大赛全国三等奖"
   publications: []
   introduction:
@@ -77,11 +77,11 @@
     - role: "Intelligent Three-Phase Inverter"
       company: "National Undergraduate Electronics Design Contest"
       time: "2025"
-      details: "Worked on an intelligent three-phase inverter, responsible for hardware–software integration and debugging. The project received a provincial second prize."
+      details: "Worked on an intelligent three-phase inverter, responsible for hardware–software integration and debugging. The project received Second Prize in the Guangdong Division."
       tech: "Three-phase inverter, hardware–software integration"
   honors:
     - "ICAN AI Challenge — National Second Prize, 2025"
-    - "Electronic Design Competition — Provincial Second Prize, 2025"
+    - "Electronic Design Competition — Second Prize, Guangdong Division, 2025"
     - "RISC-V Innovation Competition — National Third Prize, 2025"
   publications: []
   introduction:
