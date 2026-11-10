@@ -16,7 +16,7 @@
     - {title: "编程语言", skill: ["Python", "C / C++"]}
   experience:
     - role: "基于 π0.5 的 SO-101 双臂 VLA 后训练与真实机器人部署"
-      company: "本科毕业设计 / 独立机器人学习项目"
+      company: "新加坡国立大学苏州研究院｜YC Liang"
       time: "2026–至今"
       highlights:
         - "场景与数据集：搭建双 SO-101、三相机试管收纳平台，以 30 Hz 采集 12 维绝对关节动作；构建并治理两套共 152 条、139,564 帧的 LeRobot 真机示范数据，完成异常轨迹修复、语言标注和完整性校验。"
@@ -70,7 +70,7 @@
     - {title: "Programming Languages", skill: ["Python", "C / C++"]}
   experience:
     - role: "π0.5 Post-Training and Real-World Deployment for Bimanual SO-101"
-      company: "Undergraduate capstone / Independent robot learning project"
+      company: "National University of Singapore (Suzhou) Research Institute | YC Liang"
       time: "2026–Present"
       highlights:
         - "System and dataset: Built a bimanual SO-101 test-tube organization platform with three cameras and recorded 12-D absolute joint actions at 30 Hz. Curated two LeRobot datasets totaling 152 real-robot demonstrations and 139,564 frames, including trajectory repair, language annotation, and integrity validation."
