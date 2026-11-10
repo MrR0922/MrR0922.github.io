@@ -132,9 +132,9 @@
                         </p>
                         {% if e.github or e.huggingface %}
                         <p class="project-links">
-                            {% if e.github %}<a href="{{ e.github }}" target="_blank">GitHub</a>{% endif %}
-                            {% if e.github and e.huggingface %}<span> · </span>{% endif %}
-                            {% if e.huggingface %}<a href="{{ e.huggingface }}" target="_blank">Hugging Face</a>{% endif %}
+                            {% if e.github %}<span>GitHub: </span><a href="{{ e.github }}" target="_blank">{{ e.github }}</a>{% endif %}
+                            {% if e.github and e.huggingface %}<br>{% endif %}
+                            {% if e.huggingface %}<span>Hugging Face: </span><a href="{{ e.huggingface }}" target="_blank">{{ e.huggingface }}</a>{% endif %}
                         </p>
                         {% endif %}
                     </div>
