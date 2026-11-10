@@ -21,14 +21,14 @@ cover: '/assets/img/hero-robotics-lab.png'
 
 ## 代表项目
 
-### 基于 GR00T N1 的 SO-101 机械臂 VLA 后训练与 Sim-to-Real 迁移
+### 基于 π0.5 的 SO-101 双臂 VLA 后训练与真实机器人部署
 
-**技术栈：** NVIDIA GR00T N1、Isaac Sim / Isaac Lab、LeRobot、NVIDIA Cosmos、PyTorch
+**技术栈：** LeRobot、π0.5、PyTorch、FSDP2、Behavior Cloning、RECAP、SO-101
 
-- **VLA 模型适配与后训练：** 基于 GR00T N1 预训练模型，面向模拟化学实验中的试管收纳任务开展 SO-101 机械臂策略适配，将 Isaac Sim / Isaac Lab 仿真操作轨迹转换为 LeRobot 格式，完成模型后训练。
-- **多源数据联合训练：** 通过遥操作采集约 75 条真实机器人示范轨迹，结合仿真数据开展 Co-training，并引入 NVIDIA Cosmos 生成数据扩充训练集，探索多源数据对机器人操作策略的影响。
-- **视觉域随机化与 Sim-to-Real 优化：** 在仿真环境中对光照、物体纹理、场景背景及相机位姿进行随机化，增加视觉观测多样性，缓解仿真与真实环境之间的视觉分布差异。
-- **真实机器人部署与评测：** 在 SO-101 实体机械臂上部署后训练策略，针对试管收纳任务开展真实环境测试，评估不同训练数据配置下的机器人操作表现。
+- **双臂系统与数据工程：** 搭建由两台 SO-101 Follower 和场景、左右腕部三路相机构成的试管收纳系统，以 30 Hz 采集 12 维绝对关节动作；构建并治理两套共 152 条、139,564 帧的 LeRobot 真机示范数据，完成异常轨迹拆分、完整性校验、任务指令标注与数据溯源。
+- **π0.5 全参数后训练：** 基于 `lerobot/pi05_base` 的 PyTorch 实现进行 Behavior Cloning / SFT，在 8×RTX 4090 上使用 FSDP2、BF16 与 gradient checkpointing 训练，并验证分布式 checkpoint 的保存和恢复流程。
+- **分布式训练工程：** 为 π0.5 耦合解码器移植 `JointDecoderLayerPair` 分片单元，修复 PaliGemma 共享权重在 DCP 优化器恢复时的别名问题；通过逐 rank 串行加载将训练适配到 128 GB CPU 内存限制的节点。
+- **真机推理与 RECAP 扩展：** 在 12 GB RTX 4080 上实现三相机连续规划、安全限位和双臂映射校验；进一步原型化 RECAP 风格视觉 critic、advantage conditioning、奖励/成功标注与在线 replay buffer，为后续在线强化学习实验建立接口。
 
 ### 基于 LingBot-VLA2 的 RoboTwin 双臂机器人操作策略后训练（进行中）
 
@@ -44,10 +44,10 @@ cover: '/assets/img/hero-robotics-lab.png'
 
 ## 技术方向
 
-- **机器人学习：** ACT、Diffusion Policy、PPO、Imitation Learning
+- **机器人学习：** π0.5、Behavior Cloning、RECAP、ACT、Imitation Learning
 - **具身智能：** VLA、开放词汇感知、机器人操作、Sim-to-Real
 - **计算机视觉：** ViT、CLIP、DINO、CNN、Transformer、DDPM
-- **平台工具：** Isaac Lab / Isaac Sim、ROS / ROS2、MoveIt、LeRobot、PyTorch
+- **平台工具：** LeRobot、PyTorch / FSDP2、ROS / ROS2、MoveIt、Isaac Lab
 
 ## 荣誉与竞赛
 

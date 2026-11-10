@@ -21,14 +21,14 @@ I am **Tyler Ren (任天乐)**. My interests lie in **robot learning, embodied A
 
 ## Selected Projects
 
-### VLA Post-Training and Sim-to-Real Transfer for the SO-101 Arm with GR00T N1
+### π0.5 Post-Training and Real-World Deployment for Bimanual SO-101
 
-**Tech stack:** NVIDIA GR00T N1, Isaac Sim / Isaac Lab, LeRobot, NVIDIA Cosmos, PyTorch
+**Tech stack:** LeRobot, π0.5, PyTorch, FSDP2, Behavior Cloning, RECAP, SO-101
 
-- **VLA adaptation and post-training:** Adapted the pretrained GR00T N1 model to an SO-101 test-tube organization task in a simulated chemistry lab, converted Isaac Sim / Isaac Lab manipulation trajectories into LeRobot format, and completed model post-training.
-- **Multi-source co-training:** Collected approximately 75 real-robot demonstrations through teleoperation, combined them with simulation trajectories for co-training, and augmented the training set with NVIDIA Cosmos-generated data to study the effects of different data sources on manipulation policies.
-- **Visual domain randomization and Sim-to-Real:** Randomized lighting, object textures, scene backgrounds, and camera poses to diversify visual observations and reduce the visual distribution gap between simulation and the real world.
-- **Real-robot deployment and evaluation:** Deployed the post-trained policy on a physical SO-101 arm and evaluated test-tube organization performance under different training-data configurations.
+- **Bimanual system and data engineering:** Built a test-tube organization system with two SO-101 Followers and scene/dual-wrist cameras, recording 12-D absolute joint actions at 30 Hz. Curated two LeRobot datasets totaling 152 real-robot demonstrations and 139,564 frames, including trajectory repair, integrity validation, language annotation, and provenance tracking.
+- **Full-parameter π0.5 post-training:** Fine-tuned the PyTorch `lerobot/pi05_base` policy with Behavior Cloning / SFT on 8×RTX 4090 GPUs using FSDP2, BF16, and gradient checkpointing, and validated distributed checkpoint save/resume.
+- **Distributed training engineering:** Ported `JointDecoderLayerPair` as an FSDP wrapping unit for π0.5's coupled decoder, fixed PaliGemma shared-weight aliasing during DCP optimizer recovery, and introduced sequential per-rank loading to operate within a 128 GB host-memory limit.
+- **Real-world inference and RECAP extension:** Implemented three-camera receding-horizon inference, safety limits, and bimanual mapping checks on a 12 GB RTX 4080. Prototyped a RECAP-style visual critic, advantage conditioning, reward/success annotations, and an online replay buffer for future online RL experiments.
 
 ### LingBot-VLA2 Post-Training for Bimanual Manipulation in RoboTwin (In Progress)
 
@@ -44,10 +44,10 @@ Implemented Action Chunking with Transformers, using a CVAE to encode demonstrat
 
 ## Technical Focus
 
-- **Robot Learning:** ACT, Diffusion Policy, PPO, imitation learning
+- **Robot Learning:** π0.5, Behavior Cloning, RECAP, ACT, imitation learning
 - **Embodied AI:** VLA, open-vocabulary perception, manipulation, sim-to-real
 - **Computer Vision:** ViT, CLIP, DINO, CNN, Transformer, DDPM
-- **Platforms:** Isaac Lab / Isaac Sim, ROS / ROS2, MoveIt, LeRobot, PyTorch
+- **Platforms:** LeRobot, PyTorch / FSDP2, ROS / ROS2, MoveIt, Isaac Lab
 
 ## Honors
 
