@@ -177,9 +177,16 @@ body {
                     font-weight: 100;
                 }
             }
-            .details, .technologies, .project-links {
+            .details, .highlights, .technologies, .project-links {
                 color: var(--fg-color-body);
                 font-size: 14px;
+            }
+            .highlights {
+                margin: 5px 0;
+                padding-left: 18px;
+                li {
+                    margin-bottom: 3px;
+                }
             }
             .project-links {
                 margin-top: -8px;

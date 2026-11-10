@@ -27,10 +27,9 @@ cover: '/assets/img/hero-robotics-lab.png'
 
 **项目链接：** [GitHub](https://github.com/MrR0922) · [Hugging Face](https://huggingface.co/TylerRen66/pi05-so101-bimanual-tube-storage)
 
-- **双臂系统与数据工程：** 搭建由两台 SO-101 Follower 和场景、左右腕部三路相机构成的试管收纳系统，以 30 Hz 采集 12 维绝对关节动作；构建并治理两套共 152 条、139,564 帧的 LeRobot 真机示范数据，完成异常轨迹拆分、完整性校验、任务指令标注与数据溯源。
-- **π0.5 全参数后训练：** 基于 `lerobot/pi05_base` 的 PyTorch 实现进行 Behavior Cloning / SFT，在 8×RTX 4090 上使用 FSDP2、BF16 与 gradient checkpointing 训练，并验证分布式 checkpoint 的保存和恢复流程。
-- **分布式训练工程：** 为 π0.5 耦合解码器移植 `JointDecoderLayerPair` 分片单元，修复 PaliGemma 共享权重在 DCP 优化器恢复时的别名问题；通过逐 rank 串行加载将训练适配到 128 GB CPU 内存限制的节点。
-- **真机推理与 RECAP 扩展：** 在 12 GB RTX 4080 上实现三相机连续规划、安全限位和双臂映射校验；进一步原型化 RECAP 风格视觉 critic、advantage conditioning、奖励/成功标注与在线 replay buffer，为后续在线强化学习实验建立接口。
+- **场景搭建与数据集构建：** 搭建由两台 SO-101 Follower 和场景、左右腕部三路相机构成的试管收纳平台，以 30 Hz 采集 12 维绝对关节动作；构建并治理两套共 152 条、139,564 帧的 LeRobot 真机示范数据，完成异常轨迹修复、语言指令标注、完整性校验与数据溯源。
+- **多卡全参数训练：** 基于 `lerobot/pi05_base` 进行 Behavior Cloning / SFT，在 8×RTX 4090 上使用 FSDP2、BF16 与 gradient checkpointing 训练；为耦合解码器移植 `JointDecoderLayerPair`，修复 PaliGemma 共享权重的 DCP 恢复问题，并验证 checkpoint 保存与恢复。
+- **DAgger 与 RECAP 后训练：** 围绕策略失效样本设计 DAgger 式数据采集与回灌流程；原型化 RECAP 视觉 critic、advantage conditioning、奖励/成功标注及在线 replay buffer，为后续真机在线优化建立接口。
 
 ### 基于 LingBot-VLA2 的 RoboTwin 双臂机器人操作策略后训练（进行中）
 

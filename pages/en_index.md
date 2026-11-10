@@ -27,10 +27,9 @@ I am **Tyler Ren (任天乐)**. My interests lie in **robot learning, embodied A
 
 **Project links:** [GitHub](https://github.com/MrR0922) · [Hugging Face](https://huggingface.co/TylerRen66/pi05-so101-bimanual-tube-storage)
 
-- **Bimanual system and data engineering:** Built a test-tube organization system with two SO-101 Followers and scene/dual-wrist cameras, recording 12-D absolute joint actions at 30 Hz. Curated two LeRobot datasets totaling 152 real-robot demonstrations and 139,564 frames, including trajectory repair, integrity validation, language annotation, and provenance tracking.
-- **Full-parameter π0.5 post-training:** Fine-tuned the PyTorch `lerobot/pi05_base` policy with Behavior Cloning / SFT on 8×RTX 4090 GPUs using FSDP2, BF16, and gradient checkpointing, and validated distributed checkpoint save/resume.
-- **Distributed training engineering:** Ported `JointDecoderLayerPair` as an FSDP wrapping unit for π0.5's coupled decoder, fixed PaliGemma shared-weight aliasing during DCP optimizer recovery, and introduced sequential per-rank loading to operate within a 128 GB host-memory limit.
-- **Real-world inference and RECAP extension:** Implemented three-camera receding-horizon inference, safety limits, and bimanual mapping checks on a 12 GB RTX 4080. Prototyped a RECAP-style visual critic, advantage conditioning, reward/success annotations, and an online replay buffer for future online RL experiments.
+- **System and dataset:** Built a test-tube organization platform with two SO-101 Followers and scene/dual-wrist cameras, recording 12-D absolute joint actions at 30 Hz. Curated two LeRobot datasets totaling 152 real-robot demonstrations and 139,564 frames, including trajectory repair, language annotation, integrity validation, and provenance tracking.
+- **Multi-GPU full-parameter training:** Fine-tuned `lerobot/pi05_base` with Behavior Cloning / SFT on 8×RTX 4090 GPUs using FSDP2, BF16, and gradient checkpointing. Ported `JointDecoderLayerPair`, fixed PaliGemma shared-weight recovery with DCP, and validated distributed checkpoint save/resume.
+- **DAgger and RECAP post-training:** Designed a DAgger-style failure-data collection and relabeling loop. Prototyped a RECAP visual critic, advantage conditioning, reward/success annotations, and an online replay buffer as interfaces for future real-robot online optimization.
 
 ### LingBot-VLA2 Post-Training for Bimanual Manipulation in RoboTwin (In Progress)
 

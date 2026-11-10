@@ -120,9 +120,13 @@
                         <div class="company">
                             {{ e.company }} <span class="time">{{ e.time }}</span>
                         </div>
-                        <div class="details">
-                            {{ e.details }}
-                        </div>
+                        {% if e.highlights %}
+                        <ul class="highlights">
+                            {% for h in e.highlights %}<li>{{ h }}</li>{% endfor %}
+                        </ul>
+                        {% elsif e.details %}
+                        <div class="details">{{ e.details }}</div>
+                        {% endif %}
                         <p class="technologies">
                             {{ e.tech }}
                         </p>
