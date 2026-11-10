@@ -27,7 +27,7 @@ I am **Tyler Ren (任天乐)**. My interests lie in **robot learning, embodied A
 
 **Project links:** [GitHub](https://github.com/MrR0922) · [Hugging Face](https://huggingface.co/TylerRen66/pi05-so101-bimanual-tube-storage)
 
-- **System and dataset:** Built a test-tube organization platform with two SO-101 Followers and scene/dual-wrist cameras, recording 12-D absolute joint actions at 30 Hz. Curated two LeRobot datasets totaling 152 real-robot demonstrations and 139,564 frames, including trajectory repair, language annotation, integrity validation, and provenance tracking.
+- **System and dataset:** Built a test-tube organization platform with two SO-101 Followers and scene/dual-wrist cameras, recording 12-D absolute joint actions at 30 Hz. Curated two LeRobot datasets totaling 152 real-robot demonstrations and 139,564 frames, including trajectory repair, language annotation, integrity validation, and provenance tracking. Dataset: [huggingface.co/datasets/TylerRen66/so101-bimanual-clean](https://huggingface.co/datasets/TylerRen66/so101-bimanual-clean)
 - **Multi-GPU full-parameter training:** Fine-tuned `lerobot/pi05_base` with Behavior Cloning / SFT on 8×RTX 4090 GPUs using FSDP2, BF16, and gradient checkpointing. Ported `JointDecoderLayerPair`, fixed PaliGemma shared-weight recovery with DCP, and validated distributed checkpoint save/resume.
 - **DAgger and RECAP post-training:** Designed a DAgger-style failure-data collection and relabeling loop. Prototyped a RECAP visual critic, advantage conditioning, reward/success annotations, and an online replay buffer as interfaces for future real-robot online optimization.
 

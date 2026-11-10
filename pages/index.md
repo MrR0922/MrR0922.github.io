@@ -27,7 +27,7 @@ cover: '/assets/img/hero-robotics-lab.png'
 
 **项目链接：** [GitHub](https://github.com/MrR0922) · [Hugging Face](https://huggingface.co/TylerRen66/pi05-so101-bimanual-tube-storage)
 
-- **场景搭建与数据集构建：** 搭建由两台 SO-101 Follower 和场景、左右腕部三路相机构成的试管收纳平台，以 30 Hz 采集 12 维绝对关节动作；构建并治理两套共 152 条、139,564 帧的 LeRobot 真机示范数据，完成异常轨迹修复、语言指令标注、完整性校验与数据溯源。
+- **场景搭建与数据集构建：** 搭建由两台 SO-101 Follower 和场景、左右腕部三路相机构成的试管收纳平台，以 30 Hz 采集 12 维绝对关节动作；构建并治理两套共 152 条、139,564 帧的 LeRobot 真机示范数据，完成异常轨迹修复、语言指令标注、完整性校验与数据溯源。数据集：[huggingface.co/datasets/TylerRen66/so101-bimanual-clean](https://huggingface.co/datasets/TylerRen66/so101-bimanual-clean)
 - **多卡全参数训练：** 基于 `lerobot/pi05_base` 进行 Behavior Cloning / SFT，在 8×RTX 4090 上使用 FSDP2、BF16 与 gradient checkpointing 训练；为耦合解码器移植 `JointDecoderLayerPair`，修复 PaliGemma 共享权重的 DCP 恢复问题，并验证 checkpoint 保存与恢复。
 - **DAgger 与 RECAP 后训练：** 围绕策略失效样本设计 DAgger 式数据采集与回灌流程；原型化 RECAP 视觉 critic、advantage conditioning、奖励/成功标注及在线 replay buffer，为后续真机在线优化建立接口。
 

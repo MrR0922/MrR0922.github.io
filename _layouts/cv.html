@@ -122,7 +122,14 @@
                         </div>
                         {% if e.highlights %}
                         <ul class="highlights">
-                            {% for h in e.highlights %}<li>{{ h }}</li>{% endfor %}
+                            {% for h in e.highlights %}
+                            <li>
+                                {{ h }}
+                                {% if forloop.first and e.dataset %}
+                                <div class="dataset-link">Dataset: <a href="{{ e.dataset }}" target="_blank">{{ e.dataset }}</a></div>
+                                {% endif %}
+                            </li>
+                            {% endfor %}
                         </ul>
                         {% elsif e.details %}
                         <div class="details">{{ e.details }}</div>
