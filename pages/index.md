@@ -23,7 +23,9 @@ cover: '/assets/img/hero-robotics-lab.png'
 
 ### 基于 π0.5 的 SO-101 双臂 VLA 后训练与真实机器人部署
 
-**技术栈：** LeRobot、π0.5、PyTorch、FSDP2、Behavior Cloning、RECAP、SO-101
+**技术栈：** LeRobot、π0.5、Flow Matching、PyTorch、FSDP2、Behavior Cloning、DAgger、RECAP、SO-101
+
+**项目链接：** [GitHub](https://github.com/MrR0922) · [Hugging Face](https://huggingface.co/TylerRen66/pi05-so101-bimanual-tube-storage)
 
 - **双臂系统与数据工程：** 搭建由两台 SO-101 Follower 和场景、左右腕部三路相机构成的试管收纳系统，以 30 Hz 采集 12 维绝对关节动作；构建并治理两套共 152 条、139,564 帧的 LeRobot 真机示范数据，完成异常轨迹拆分、完整性校验、任务指令标注与数据溯源。
 - **π0.5 全参数后训练：** 基于 `lerobot/pi05_base` 的 PyTorch 实现进行 Behavior Cloning / SFT，在 8×RTX 4090 上使用 FSDP2、BF16 与 gradient checkpointing 训练，并验证分布式 checkpoint 的保存和恢复流程。
@@ -44,10 +46,10 @@ cover: '/assets/img/hero-robotics-lab.png'
 
 ## 技术方向
 
-- **机器人学习：** π0.5、Behavior Cloning、RECAP、ACT、Imitation Learning
+- **机器人学习：** π0.5、Flow Matching、Behavior Cloning、DAgger、RECAP、ACT
 - **具身智能：** VLA、开放词汇感知、机器人操作、Sim-to-Real
 - **计算机视觉：** ViT、CLIP、DINO、CNN、Transformer、DDPM
-- **平台工具：** LeRobot、PyTorch / FSDP2、ROS / ROS2、MoveIt、Isaac Lab
+- **平台工具：** LeRobot、PyTorch / FSDP2、MoveIt、Isaac Lab
 
 ## 荣誉与竞赛
 

@@ -23,7 +23,9 @@ I am **Tyler Ren (任天乐)**. My interests lie in **robot learning, embodied A
 
 ### π0.5 Post-Training and Real-World Deployment for Bimanual SO-101
 
-**Tech stack:** LeRobot, π0.5, PyTorch, FSDP2, Behavior Cloning, RECAP, SO-101
+**Tech stack:** LeRobot, π0.5, Flow Matching, PyTorch, FSDP2, Behavior Cloning, DAgger, RECAP, SO-101
+
+**Project links:** [GitHub](https://github.com/MrR0922) · [Hugging Face](https://huggingface.co/TylerRen66/pi05-so101-bimanual-tube-storage)
 
 - **Bimanual system and data engineering:** Built a test-tube organization system with two SO-101 Followers and scene/dual-wrist cameras, recording 12-D absolute joint actions at 30 Hz. Curated two LeRobot datasets totaling 152 real-robot demonstrations and 139,564 frames, including trajectory repair, integrity validation, language annotation, and provenance tracking.
 - **Full-parameter π0.5 post-training:** Fine-tuned the PyTorch `lerobot/pi05_base` policy with Behavior Cloning / SFT on 8×RTX 4090 GPUs using FSDP2, BF16, and gradient checkpointing, and validated distributed checkpoint save/resume.
@@ -44,10 +46,10 @@ Implemented Action Chunking with Transformers, using a CVAE to encode demonstrat
 
 ## Technical Focus
 
-- **Robot Learning:** π0.5, Behavior Cloning, RECAP, ACT, imitation learning
+- **Robot Learning:** π0.5, Flow Matching, Behavior Cloning, DAgger, RECAP, ACT
 - **Embodied AI:** VLA, open-vocabulary perception, manipulation, sim-to-real
 - **Computer Vision:** ViT, CLIP, DINO, CNN, Transformer, DDPM
-- **Platforms:** LeRobot, PyTorch / FSDP2, ROS / ROS2, MoveIt, Isaac Lab
+- **Platforms:** LeRobot, PyTorch / FSDP2, MoveIt, Isaac Lab
 
 ## Honors
 

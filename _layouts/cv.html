@@ -31,9 +31,6 @@
     <div class="container">
         <header>
             <h1 class="title">{{ cv.name }}</h1>
-            {% if cv.motivation %}
-            <h3 class="motivation"><span class="mtitle">{% if cv.lang == "zh" %}目标岗位：{% else %} Job: {% endif %}</span>{{ cv.motivation }}</h3>
-            {% endif %}
             <div class="labels">
                 <input type="checkbox" id="switch" name="mode" class="toggle-dark">
                 <label for="switch">
@@ -129,6 +126,13 @@
                         <p class="technologies">
                             {{ e.tech }}
                         </p>
+                        {% if e.github or e.huggingface %}
+                        <p class="project-links">
+                            {% if e.github %}<a href="{{ e.github }}" target="_blank">GitHub</a>{% endif %}
+                            {% if e.github and e.huggingface %}<span> · </span>{% endif %}
+                            {% if e.huggingface %}<a href="{{ e.huggingface }}" target="_blank">Hugging Face</a>{% endif %}
+                        </p>
+                        {% endif %}
                     </div>
                     {% endfor %}
                 </section>

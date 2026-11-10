@@ -10,16 +10,18 @@
     - {degree: "电子信息工程学士", university: "深圳大学", time: "2023–2026"}
     - {degree: "", university: "新加坡国立大学苏州研究院", time: "2026–现在"}
   skills:
-    - {title: "机器人学习", skill: ["π0.5", "Behavior Cloning", "RECAP", "Imitation Learning", "VLA"]}
+    - {title: "机器人学习", skill: ["π0.5", "Flow Matching", "Behavior Cloning", "DAgger", "RECAP"]}
     - {title: "计算机视觉", skill: ["ViT", "CLIP", "DINO", "CNN", "Transformer", "DDPM"]}
-    - {title: "平台与框架", skill: ["LeRobot", "PyTorch / FSDP2", "ROS / ROS2", "MoveIt", "Isaac Lab"]}
+    - {title: "平台与框架", skill: ["LeRobot", "PyTorch / FSDP2", "MoveIt", "Isaac Lab"]}
     - {title: "编程语言", skill: ["Python", "C / C++"]}
   experience:
     - role: "基于 π0.5 的 SO-101 双臂 VLA 后训练与真实机器人部署"
       company: "本科毕业设计 / 独立机器人学习项目"
       time: "2026–至今"
       details: "搭建双 SO-101、三相机试管收纳系统，治理两套共 152 条、139,564 帧的 LeRobot 真机示范数据；基于 lerobot/pi05_base 在 8×RTX 4090 上进行 FSDP2 全参数 SFT，解决耦合解码器分片、DCP 恢复与低内存加载问题，并在 12 GB RTX 4080 上完成安全真机推理；进一步实现 RECAP 风格视觉 critic、advantage conditioning 与在线 replay 原型。"
-      tech: "LeRobot、π0.5、PyTorch、FSDP2、Behavior Cloning、RECAP、SO-101"
+      tech: "LeRobot、π0.5、Flow Matching、PyTorch、FSDP2、Behavior Cloning、DAgger、RECAP、SO-101"
+      github: "https://github.com/MrR0922"
+      huggingface: "https://huggingface.co/TylerRen66/pi05-so101-bimanual-tube-storage"
     - role: "基于 LingBot-VLA2 的 RoboTwin 双臂操作策略后训练"
       company: "机器人学习项目（进行中）"
       time: "2026–至今"
@@ -59,16 +61,18 @@
     - {degree: "B.E. in Electronic Information Engineering", university: "Shenzhen University", time: "2023–2026"}
     - {degree: "", university: "National University of Singapore (Suzhou) Research Institute", time: "2026–present"}
   skills:
-    - {title: "Robot Learning", skill: ["π0.5", "Behavior Cloning", "RECAP", "Imitation Learning", "VLA"]}
+    - {title: "Robot Learning", skill: ["π0.5", "Flow Matching", "Behavior Cloning", "DAgger", "RECAP"]}
     - {title: "Computer Vision", skill: ["ViT", "CLIP", "DINO", "CNN", "Transformer", "DDPM"]}
-    - {title: "Platforms", skill: ["LeRobot", "PyTorch / FSDP2", "ROS / ROS2", "MoveIt", "Isaac Lab"]}
+    - {title: "Platforms", skill: ["LeRobot", "PyTorch / FSDP2", "MoveIt", "Isaac Lab"]}
     - {title: "Programming Languages", skill: ["Python", "C / C++"]}
   experience:
     - role: "π0.5 Post-Training and Real-World Deployment for Bimanual SO-101"
       company: "Undergraduate capstone / Independent robot learning project"
       time: "2026–Present"
       details: "Built a bimanual SO-101 test-tube organization system with three cameras and curated two LeRobot datasets totaling 152 real-robot demonstrations and 139,564 frames. Performed full-parameter SFT of lerobot/pi05_base with FSDP2 on 8×RTX 4090 GPUs, resolving coupled-decoder sharding, DCP recovery, and memory-efficient loading issues; deployed safe inference on a 12 GB RTX 4080 and prototyped a RECAP-style visual critic, advantage conditioning, and online replay."
-      tech: "LeRobot, π0.5, PyTorch, FSDP2, Behavior Cloning, RECAP, SO-101"
+      tech: "LeRobot, π0.5, Flow Matching, PyTorch, FSDP2, Behavior Cloning, DAgger, RECAP, SO-101"
+      github: "https://github.com/MrR0922"
+      huggingface: "https://huggingface.co/TylerRen66/pi05-so101-bimanual-tube-storage"
     - role: "LingBot-VLA2 Post-Training for RoboTwin Bimanual Manipulation"
       company: "Robot learning project (in progress)"
       time: "2026–Present"
