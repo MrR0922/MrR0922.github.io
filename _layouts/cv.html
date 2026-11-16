@@ -126,7 +126,10 @@
                             <li>
                                 {{ h }}
                                 {% if forloop.first and e.dataset %}
-                                <div class="dataset-link">Dataset: <a href="{{ e.dataset }}" target="_blank">{{ e.dataset }}</a></div>
+                                <div class="dataset-link">{% if cv.lang == "zh" %}专家数据集：{% else %}Expert dataset: {% endif %}<a href="{{ e.dataset }}" target="_blank">{{ e.dataset }}</a></div>
+                                {% endif %}
+                                {% if forloop.last and e.dagger_dataset %}
+                                <div class="dataset-link">{% if cv.lang == "zh" %}DAgger 数据集：{% else %}DAgger dataset: {% endif %}<a href="{{ e.dagger_dataset }}" target="_blank">{{ e.dagger_dataset }}</a></div>
                                 {% endif %}
                             </li>
                             {% endfor %}
