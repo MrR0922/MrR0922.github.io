@@ -39,7 +39,7 @@
       time: "2026–至今"
       highlights:
         - "模型与任务适配：围绕 LingBot-VLA2 和 RoboTwin 双臂操作任务，研究多视角视觉观测、语言指令、机器人状态与动作空间的接口映射，设计 SFT / Behavior Cloning 后训练流程。"
-        - "训练工程：在开源后训练代码基础上完善 4 卡 / 8 卡切换配置，涉及训练脚本、运行配置和 Docker 环境，提升多 GPU 实验的配置灵活性。"
+        - "训练工程：采用冻结视觉编码器的后训练配置，在开源代码基础上完善 4 卡 / 8 卡切换，涉及训练脚本、运行配置和 Docker 环境，提升多 GPU 实验的配置灵活性。"
         - "实验设计：以 RoboTwin 官方示范为基础，规划数据预处理、策略训练、仿真 rollout 与任务成功率评估，关注不同初始条件下的策略泛化能力。"
       github: "https://github.com/MrR0922/lingbot-VLA-2.0_post-training"
       tech: "LingBot-VLA2、RoboTwin、PyTorch、SFT、Behavior Cloning"
@@ -99,7 +99,7 @@
       time: "2026–Present"
       highlights:
         - "Model and task adaptation: Studied interface mappings for multi-view observations, language instructions, robot states and action spaces between LingBot-VLA2 and RoboTwin, and designed an SFT / behavior cloning workflow."
-        - "Training infrastructure: Extended the open-source post-training configuration to support switching between 4-GPU and 8-GPU setups, covering training scripts, runtime configuration and Docker environments."
+        - "Training infrastructure: Used a post-training configuration with the vision encoder frozen and extended the open-source code to support switching between 4-GPU and 8-GPU setups, covering training scripts, runtime configuration and Docker environments."
         - "Experimental design: Planned demonstration preprocessing, policy training, simulation rollouts and task-success evaluation using RoboTwin demonstrations, with an emphasis on generalization across initial conditions."
       github: "https://github.com/MrR0922/lingbot-VLA-2.0_post-training"
       tech: "LingBot-VLA2, RoboTwin, PyTorch, SFT, Behavior Cloning"
